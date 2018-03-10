@@ -28,9 +28,10 @@ gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 
 gem 'pg'
+gem 'haml'
 
 # Use figaro for environment variable handling
 gem 'figaro'
@@ -40,11 +41,19 @@ gem 'carrierwave-aws'
 gem 'mini_magick'
 
 group :development, :test do
+  gem 'pry'
+  gem 'pry-nav'
+  gem 'rspec-rails'
+  gem 'fabrication'
+  gem 'faker'
+  gem 'rspec_junit_formatter'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+  gem 'rails-controller-testing'
+  gem 'shoulda-matchers'
 end
 
 group :development do
@@ -58,3 +67,7 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+group :production, :staging do
+  gem 'rails_12factor'
+end
