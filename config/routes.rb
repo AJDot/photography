@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root to: 'users#edit'
+  root to: 'ui#index'
 
+  get 'ui/:action', controller: 'ui'
   resources :users, only: [:edit, :update]
 end
