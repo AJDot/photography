@@ -3,7 +3,7 @@ class UiController < ApplicationController
     redirect_to :root if Rails.env.production? || Rails.env.staging?
   end
 
-  layout "application"
+  layout "ui"
 
   def index
   end
