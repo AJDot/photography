@@ -1,44 +1,75 @@
 = content_for :head do
   :javascript
     $(document).on("turbolinks:load", function() {
-      $('.sessions-filter__button').on('click', function(event) {
-        $('.sessions-filter__list').toggleClass('sessions-filter__list--opened')
-      });
+      var SessionFilterer = {
+        Filter: {
+          bindEvents: function() {
+            $('.sessions-filter__button, .sessions-filter__link').on('click', function(event) {
+              $('.sessions-filter__list').toggleClass('sessions-filter__list--opened');
+            });
 
-      $('.sessions-filter__list').on('click', 'a', function(event) {
-        $a = $(this);
-        $li = $a.closest('.sessions-filter__item');
-        $('.sessions-filter__item').removeClass('active');
-        $li.addClass('active')
-      });
+            $('.sessions-filter__list').on('click', 'a', function(event) {
+              $a = $(this);
+              $li = $a.closest('.sessions-filter__item');
+              $('.sessions-filter__item').removeClass('active');
+              $li.addClass('active');
+            });
+          }
+        },
+
+        filterSessions: function(event) {
+          event.preventDefault();
+          var kind = $(event.currentTarget).data("kind");
+          var $cards = $(".session-card");
+          var kindFilter = '[data-kind="' + kind + '"]';
+          var $picked = $cards.filter(kindFilter);
+          var $notPicked = $cards.not(kindFilter);
+
+          $picked.show();
+          $notPicked.hide();
+          this.updateButton(kind);
+        },
+
+        updateButton: function(kind) {
+          var $button = $('.sessions-filter__button')
+          $button.text(kind);
+        },
+
+        bindEvents: function() {
+          this.Filter.bindEvents();
+          $('.sessions-filter__link').on('click', this.filterSessions.bind(this));
+        }
+      }
+
+      SessionFilterer.bindEvents();
     });
 
 %section.sessions
   %h2.sessions__title
-    Sessions
-  .sessions-filter
-    %button.sessions-filter__button Filter
-    %ul.sessions-filter__list
-      %li.sessions-filter__item.sessions-filter__item--one
-        %a.sessions-filter__link(href="/ui/sessions")
-          %span.icon Family
-      %li.sessions-filter__item.sessions-filter__item--two
-        %a.sessions-filter__link(href="")
-          %span.icon Engagement
-      %li.sessions-filter__item.sessions-filter__item--three
-        %a.sessions-filter__link(href="")
-          %span.icon Newborn
-      %li.sessions-filter__item.sessions-filter__item--four
-        %a.sessions-filter__link(href="")
-          %span.icon Portait
+    %span Sessions
+    .sessions-filter
+      %button.sessions-filter__button Filter
+      %ul.sessions-filter__list
+        %li.sessions-filter__item.sessions-filter__item--one
+          %a.sessions-filter__link(href="#" data-kind="Family")
+            %span.sessions-filter__link--icon Family
+        %li.sessions-filter__item.sessions-filter__item--two
+          %a.sessions-filter__link(href="#" data-kind="Engagement")
+            %span.sessions-filter__link--icon Engagement
+        %li.sessions-filter__item.sessions-filter__item--three
+          %a.sessions-filter__link(href="#" data-kind="Newborn")
+            %span.sessions-filter__link--icon Newborn
+        %li.sessions-filter__item.sessions-filter__item--four
+          %a.sessions-filter__link(href="#" data-kind="Portrait")
+            %span.sessions-filter__link--icon Portait
 
-  %svg(height="0" width="0")
-    %defs
-      %clipPath(clipPathUnits="objectBoundingBox" id="sector")
-        %path(fill="none" stroke="#111" stroke-width="1" class="sector" d="M0.5,0.5 l0.5,0 A0.5,0.5 0 0,0 0.5,0 z")
+    %svg(height="0" width="0")
+      %defs
+        %clipPath(clipPathUnits="objectBoundingBox" id="sector")
+          %path(fill="none" stroke="#111" stroke-width="1" class="sector" d="M0.5,0.5 l0.5,0 A0.5,0.5 0 0,0 0.5,0 z")
 
   %ul.sessions__list
-    %li.session-card
+    %li.session-card(data-kind="Family")
       %a.session-card__link(href="#")
         %img.session-card__img(src="/tmp/portfolio_family.jpg")
         .session-card__overlay
@@ -49,7 +80,7 @@
               %h3.session-card__title--inner Awesome Family
             %li.session-card__kind
               %small Family Session
-    %li.session-card
+    %li.session-card(data-kind="Engagement")
       %a.session-card__link(href="#")
         %img.session-card__img(src="/tmp/portfolio_engagement.jpg")
         .session-card__overlay
@@ -60,7 +91,7 @@
               %h3.session-card__title--inner Awesome Family
             %li.session-card__kind
               %small Family Session
-    %li.session-card
+    %li.session-card(data-kind="Newborn")
       %a.session-card__link(href="#")
         %img.session-card__img(src="/tmp/portfolio_newborn.jpg")
         .session-card__overlay
@@ -71,7 +102,7 @@
               %h3.session-card__title--inner Awesome Family
             %li.session-card__kind
               %small Family Session
-    %li.session-card
+    %li.session-card(data-kind="Portrait")
       %a.session-card__link(href="#")
         %img.session-card__img(src="/tmp/portfolio_portrait.jpg")
         .session-card__overlay
@@ -82,7 +113,7 @@
               %h3.session-card__title--inner Awesome Family
             %li.session-card__kind
               %small Family Session
-    %li.session-card
+    %li.session-card(data-kind="Family")
       %a.session-card__link(href="#")
         %img.session-card__img(src="/tmp/portfolio_family.jpg")
         .session-card__overlay
@@ -93,7 +124,7 @@
               %h3.session-card__title--inner Awesome Family
             %li.session-card__kind
               %small Family Session
-    %li.session-card
+    %li.session-card(data-kind="Engagement")
       %a.session-card__link(href="#")
         %img.session-card__img(src="/tmp/portfolio_engagement.jpg")
         .session-card__overlay
@@ -104,7 +135,7 @@
               %h3.session-card__title--inner Awesome Family
             %li.session-card__kind
               %small Family Session
-    %li.session-card
+    %li.session-card(data-kind="Newborn")
       %a.session-card__link(href="#")
         %img.session-card__img(src="/tmp/portfolio_newborn.jpg")
         .session-card__overlay
@@ -115,7 +146,7 @@
               %h3.session-card__title--inner Awesome Family
             %li.session-card__kind
               %small Family Session
-    %li.session-card
+    %li.session-card(data-kind="Portrait")
       %a.session-card__link(href="#")
         %img.session-card__img(src="/tmp/portfolio_portrait.jpg")
         .session-card__overlay
@@ -126,7 +157,7 @@
               %h3.session-card__title--inner Awesome Family
             %li.session-card__kind
               %small Family Session
-    %li.session-card
+    %li.session-card(data-kind="Family")
       %a.session-card__link(href="#")
         %img.session-card__img(src="/tmp/portfolio_family.jpg")
         .session-card__overlay
@@ -137,7 +168,7 @@
               %h3.session-card__title--inner Awesome Family
             %li.session-card__kind
               %small Family Session
-    %li.session-card
+    %li.session-card(data-kind="Engagement")
       %a.session-card__link(href="#")
         %img.session-card__img(src="/tmp/portfolio_engagement.jpg")
         .session-card__overlay
@@ -148,7 +179,7 @@
               %h3.session-card__title--inner Awesome Family
             %li.session-card__kind
               %small Family Session
-    %li.session-card
+    %li.session-card(data-kind="Newborn")
       %a.session-card__link(href="#")
         %img.session-card__img(src="/tmp/portfolio_newborn.jpg")
         .session-card__overlay
@@ -159,7 +190,95 @@
               %h3.session-card__title--inner Awesome Family
             %li.session-card__kind
               %small Family Session
-    %li.session-card
+    %li.session-card(data-kind="Portrait")
+      %a.session-card__link(href="#")
+        %img.session-card__img(src="/tmp/portfolio_portrait.jpg")
+        .session-card__overlay
+          %ul.session-card__overlay-content
+            %li.session-card__time
+              %time(datetime="2017-12-31") 12.31.2017
+            %li.session-card__title
+              %h3.session-card__title--inner Awesome Family
+            %li.session-card__kind
+              %small Family Session
+    %li.session-card(data-kind="Family")
+      %a.session-card__link(href="#")
+        %img.session-card__img(src="/tmp/portfolio_family.jpg")
+        .session-card__overlay
+          %ul.session-card__overlay-content
+            %li.session-card__time
+              %time(datetime="2017-12-31") 12.31.2017
+            %li.session-card__title
+              %h3.session-card__title--inner Awesome Family
+            %li.session-card__kind
+              %small Family Session
+    %li.session-card(data-kind="Engagement")
+      %a.session-card__link(href="#")
+        %img.session-card__img(src="/tmp/portfolio_engagement.jpg")
+        .session-card__overlay
+          %ul.session-card__overlay-content
+            %li.session-card__time
+              %time(datetime="2017-12-31") 12.31.2017
+            %li.session-card__title
+              %h3.session-card__title--inner Awesome Family
+            %li.session-card__kind
+              %small Family Session
+    %li.session-card(data-kind="Newborn")
+      %a.session-card__link(href="#")
+        %img.session-card__img(src="/tmp/portfolio_newborn.jpg")
+        .session-card__overlay
+          %ul.session-card__overlay-content
+            %li.session-card__time
+              %time(datetime="2017-12-31") 12.31.2017
+            %li.session-card__title
+              %h3.session-card__title--inner Awesome Family
+            %li.session-card__kind
+              %small Family Session
+    %li.session-card(data-kind="Portrait")
+      %a.session-card__link(href="#")
+        %img.session-card__img(src="/tmp/portfolio_portrait.jpg")
+        .session-card__overlay
+          %ul.session-card__overlay-content
+            %li.session-card__time
+              %time(datetime="2017-12-31") 12.31.2017
+            %li.session-card__title
+              %h3.session-card__title--inner Awesome Family
+            %li.session-card__kind
+              %small Family Session
+    %li.session-card(data-kind="Family")
+      %a.session-card__link(href="#")
+        %img.session-card__img(src="/tmp/portfolio_family.jpg")
+        .session-card__overlay
+          %ul.session-card__overlay-content
+            %li.session-card__time
+              %time(datetime="2017-12-31") 12.31.2017
+            %li.session-card__title
+              %h3.session-card__title--inner Awesome Family
+            %li.session-card__kind
+              %small Family Session
+    %li.session-card(data-kind="Engagement")
+      %a.session-card__link(href="#")
+        %img.session-card__img(src="/tmp/portfolio_engagement.jpg")
+        .session-card__overlay
+          %ul.session-card__overlay-content
+            %li.session-card__time
+              %time(datetime="2017-12-31") 12.31.2017
+            %li.session-card__title
+              %h3.session-card__title--inner Awesome Family
+            %li.session-card__kind
+              %small Family Session
+    %li.session-card(data-kind="Newborn")
+      %a.session-card__link(href="#")
+        %img.session-card__img(src="/tmp/portfolio_newborn.jpg")
+        .session-card__overlay
+          %ul.session-card__overlay-content
+            %li.session-card__time
+              %time(datetime="2017-12-31") 12.31.2017
+            %li.session-card__title
+              %h3.session-card__title--inner Awesome Family
+            %li.session-card__kind
+              %small Family Session
+    %li.session-card(data-kind="Portrait")
       %a.session-card__link(href="#")
         %img.session-card__img(src="/tmp/portfolio_portrait.jpg")
         .session-card__overlay
