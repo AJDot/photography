@@ -1,0 +1,161 @@
+= content_for :head do
+  :javascript
+    $(document).on("turbolinks:load", function() {
+      var Slideshow = {
+        $slides: $('#slideshow .slideshow__figure'),
+        $thumbnails: $('#thumbnails .thumbnails__item'),
+        duration: 1500,
+        thumbsToPreview: 10,
+        onResizeTimer: null,
+        nextSlide: function(e) {
+          e.preventDefault();
+          var $next = this.cycle(this.$slides, 1);
+          this.positionThumbnails($next.index());
+          this.highlightThumb($('#thumbnails .thumbnails__item').filter('[data-id=' + $next.attr('data-id') + ']'));
+        },
+        prevSlide: function(e) {
+          e.preventDefault();
+          var $prev = this.cycle(this.$slides, -1);
+          this.positionThumbnails($prev.index());
+          this.highlightThumb(this.$thumbnails.filter('[data-id=' + $prev.attr('data-id') + ']'));
+        },
+        cycle: function($list, step) {
+          $list.stop(true, true);
+          var $current = $list.filter(':visible');
+          // This will let it wrap around the edges.
+          var $next = $list.eq(($current.index() + step) % $list.length);
+          $current.fadeOut(this.duration);
+          $next.fadeIn(this.duration);
+          return $next;
+        },
+        viewSlide: function(e) {
+          e.preventDefault();
+          var id = $(e.target).closest('li').attr('data-id');
+
+          this.$slides.filter(':visible').stop(true, true).fadeOut(this.duration);
+          this.$slides.filter('[data-id=' + id + ']').stop(true, true).fadeIn(this.duration);
+
+          var index = this.$thumbnails.filter('[data-id=' + id + ']').index();
+          this.positionThumbnails(index);
+          this.highlightThumb(this.$thumbnails.filter('[data-id=' + id + ']'));
+        },
+        positionThumbnails: function(offset = 0) {
+          var self = this;
+          var widthPx = +$('#thumbnails').width() / this.thumbsToPreview;
+          var widthPercent = (100 / this.thumbsToPreview).toString() + '%';
+          this.$thumbnails.innerWidth(widthPercent);
+
+          if (this.$thumbnails.length - offset < this.thumbsToPreview) {
+            offset = this.$thumbnails.length - this.thumbsToPreview;
+          }
+
+          this.$thumbnails.each(function(index) {
+            $(this).stop(true, true).animate({
+              left: widthPx * (index - offset),
+            }, this.duration);
+          });
+        },
+        positionThumbsOnResize: function(e) {
+          var self = this;
+          clearTimeout(this.onResizeTimer);
+          this.onResizeTimer = setTimeout(function() {
+            self.positionThumbnails(self.$thumbnails.has('a.current').index());
+          }.bind(this), this.duration);
+        },
+        highlightThumb: function($thumbnail) {
+          this.$thumbnails.find('a.current').removeClass('current');
+          $thumbnail.find('a').addClass('current');
+        },
+        bindEvents: function() {
+          $('a.next').on('click', this.nextSlide.bind(this));
+          $('a.prev').on('click', this.prevSlide.bind(this));
+          $('#thumbnails').on('click', 'a', this.viewSlide.bind(this));
+          this.positionThumbnails(0);
+          this.highlightThumb(this.$thumbnails.eq(0));
+          $(window).on('resize', this.positionThumbsOnResize.bind(this));
+        },
+        init: function() {
+          this.bindEvents();
+        },
+      };
+
+      Slideshow.init();
+    });
+
+%section.session
+  %h2.session__title Session
+  #slideshow.slideshow
+    .slideshow__slides
+      %figure.slideshow__figure(data-id="1")
+        %img(src="/tmp/session_kent/Kent_Family_2017-05-29_2.jpg" alt="PHOTO")
+      %figure.slideshow__figure(data-id="2")
+        %img(src="/tmp/session_kent/Kent_Family_2017-05-29_3.jpg" alt="PHOTO")
+      %figure.slideshow__figure(data-id="3")
+        %img(src="/tmp/session_kent/Kent_Family_2017-05-29_5.jpg" alt="PHOTO")
+      %figure.slideshow__figure(data-id="4")
+        %img(src="/tmp/session_kent/Kent_Family_2017-05-29_8.jpg" alt="PHOTO")
+      %figure.slideshow__figure(data-id="5")
+        %img(src="/tmp/session_kent/Kent_Family_2017-05-29_11.jpg" alt="PHOTO")
+      %figure.slideshow__figure(data-id="6")
+        %img(src="/tmp/session_kent/Kent_Family_2017-05-29_14.jpg" alt="PHOTO")
+      %figure.slideshow__figure(data-id="7")
+        %img(src="/tmp/session_kent/Kent_Family_2017-05-29_18.jpg" alt="PHOTO")
+      %figure.slideshow__figure(data-id="8")
+        %img(src="/tmp/session_kent/Kent_Family_2017-05-29_19.jpg" alt="PHOTO")
+      %figure.slideshow__figure(data-id="9")
+        %img(src="/tmp/session_kent/Kent_Family_2017-05-29_26.jpg" alt="PHOTO")
+      %figure.slideshow__figure(data-id="10")
+        %img(src="/tmp/session_kent/Kent_Family_2017-05-29_27.jpg" alt="PHOTO")
+      %figure.slideshow__figure(data-id="11")
+        %img(src="/tmp/session_kent/Kent_Family_2017-05-29_29.jpg" alt="PHOTO")
+      %figure.slideshow__figure(data-id="12")
+        %img(src="/tmp/session_kent/Kent_Family_2017-05-29_31.jpg" alt="PHOTO")
+      %figure.slideshow__figure(data-id="13")
+        %img(src="/tmp/session_kent/Kent_Family_2017-05-29_34.jpg" alt="PHOTO")
+    %ul#thumbnails.thumbnails
+      %li.thumbnails__item(data-id="1")
+        %a(href="#")
+          %img(src="/tmp/session_kent/Kent_Family_2017-05-29_2.jpg" alt="THUMBNAIL")
+      %li.thumbnails__item(data-id="2")
+        %a(href="#")
+          %img(src="/tmp/session_kent/Kent_Family_2017-05-29_3.jpg" alt="THUMBNAIL")
+      %li.thumbnails__item(data-id="3")
+        %a(href="#")
+          %img(src="/tmp/session_kent/Kent_Family_2017-05-29_5.jpg" alt="THUMBNAIL")
+      %li.thumbnails__item(data-id="4")
+        %a(href="#")
+          %img(src="/tmp/session_kent/Kent_Family_2017-05-29_8.jpg" alt="THUMBNAIL")
+      %li.thumbnails__item(data-id="5")
+        %a(href="#")
+          %img(src="/tmp/session_kent/Kent_Family_2017-05-29_11.jpg" alt="THUMBNAIL")
+      %li.thumbnails__item(data-id="6")
+        %a(href="#")
+          %img(src="/tmp/session_kent/Kent_Family_2017-05-29_14.jpg" alt="THUMBNAIL")
+      %li.thumbnails__item(data-id="7")
+        %a(href="#")
+          %img(src="/tmp/session_kent/Kent_Family_2017-05-29_18.jpg" alt="THUMBNAIL")
+      %li.thumbnails__item(data-id="8")
+        %a(href="#")
+          %img(src="/tmp/session_kent/Kent_Family_2017-05-29_19.jpg" alt="THUMBNAIL")
+      %li.thumbnails__item(data-id="9")
+        %a(href="#")
+          %img(src="/tmp/session_kent/Kent_Family_2017-05-29_26.jpg" alt="THUMBNAIL")
+      %li.thumbnails__item(data-id="10")
+        %a(href="#")
+          %img(src="/tmp/session_kent/Kent_Family_2017-05-29_27.jpg" alt="THUMBNAIL")
+      %li.thumbnails__item(data-id="11")
+        %a(href="#")
+          %img(src="/tmp/session_kent/Kent_Family_2017-05-29_29.jpg" alt="THUMBNAIL")
+      %li.thumbnails__item(data-id="12")
+        %a(href="#")
+          %img(src="/tmp/session_kent/Kent_Family_2017-05-29_31.jpg" alt="THUMBNAIL")
+      %li.thumbnails__item(data-id="13")
+        %a(href="#")
+          %img(src="/tmp/session_kent/Kent_Family_2017-05-29_34.jpg" alt="THUMBNAIL")
+    %ul
+      %li
+        %a.prev(href="#")
+          %i.material-icons navigate_before
+      %li
+        %a.next(href="#")
+          %i.material-icons navigate_next
