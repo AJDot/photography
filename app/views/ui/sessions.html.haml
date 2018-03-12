@@ -1,5 +1,42 @@
+= content_for :head do
+  :javascript
+    $(document).on("turbolinks:load", function() {
+      $('.sessions-filter__button').on('click', function(event) {
+        $('.sessions-filter__list').toggleClass('sessions-filter__list--opened')
+      });
+
+      $('.sessions-filter__list').on('click', 'a', function(event) {
+        $a = $(this);
+        $li = $a.closest('.sessions-filter__item');
+        $('.sessions-filter__item').removeClass('active');
+        $li.addClass('active')
+      });
+    });
+
 %section.sessions
-  %h2.sessions__title Sessions
+  %h2.sessions__title
+    Sessions
+  .sessions-filter
+    %button.sessions-filter__button Filter
+    %ul.sessions-filter__list
+      %li.sessions-filter__item.sessions-filter__item--one
+        %a.sessions-filter__link(href="/ui/sessions")
+          %span.icon Family
+      %li.sessions-filter__item.sessions-filter__item--two
+        %a.sessions-filter__link(href="")
+          %span.icon Engagement
+      %li.sessions-filter__item.sessions-filter__item--three
+        %a.sessions-filter__link(href="")
+          %span.icon Newborn
+      %li.sessions-filter__item.sessions-filter__item--four
+        %a.sessions-filter__link(href="")
+          %span.icon Portait
+
+  %svg(height="0" width="0")
+    %defs
+      %clipPath(clipPathUnits="objectBoundingBox" id="sector")
+        %path(fill="none" stroke="#111" stroke-width="1" class="sector" d="M0.5,0.5 l0.5,0 A0.5,0.5 0 0,0 0.5,0 z")
+
   %ul.sessions__list
     %li.session-card
       %a.session-card__link(href="#")
