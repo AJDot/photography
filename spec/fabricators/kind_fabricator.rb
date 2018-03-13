@@ -1,5 +1,5 @@
 Fabricator(:kind) do
-  name { Faker::Lorem.words(2).join(' ') }
+  name { Faker::Zelda.item }
   gist { Faker::Lorem.sentence }
   description { Faker::Lorem.paragraphs.join("\n") }
   price 999

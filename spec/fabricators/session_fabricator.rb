@@ -1,5 +1,5 @@
 Fabricator(:session) do
-  title { Faker::Name.name.gsub(/[^a-z0-9]/i, ' ') }
+  title { Faker::Zelda.game }
   date { Date.today.to_s }
   gist { Faker::Lorem.sentence }
   description { Faker::Lorem.paragraph}
