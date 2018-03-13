@@ -1,0 +1,42 @@
+%section.admin_create_kind
+  = form_for @kind do |f|
+    %fieldset
+      %dl.form__group.form__group--6of12
+        %dt.form__item
+          = f.label :name, 'Name', class: 'form__label'
+        %dd.form__item
+          = f.text_field :name, class: 'form__field'
+      %dl.form__group.form__group--6of12
+        %dt.form__item
+          = f.label :gist, 'Gist', class: 'form__label'
+        %dd.form__item
+          = f.text_field :gist, class: 'form__field'
+      %dl.form__group
+        %dt.form__item
+          = f.label :description, 'Description', class: 'form__label'
+        %dd.form__item
+          = f.text_area :description, class: 'form__field form__field--vert-resizeable'
+      %dl.form__group.form__group--6of12
+        %dt.form__item
+          = f.label :banner, 'Banner', class: 'form__label'
+        %dd.form__item
+          = f.file_field :banner, class: 'form__field'
+      %dl.form__group.form__group--6of12
+        %dt.form__item
+          = f.label :cover, 'Cover', class: 'form__label'
+        %dd.form__item
+          = f.file_field :cover, class: 'form__field'
+      %dl.form__group.form__group--6of12
+        %dt.form__item
+          = f.label :price, 'Price', class: 'form__label'
+        %dd.form__item.form-addon-group
+          %span.form-addon-group__addon
+            %i.fas.fa-dollar-sign
+          = f.number_field :price, step: "0.01", min: "0", placeholder: "499.99", class: 'form__field form-addon-group__item'
+      %dl.form__group.form__group--6of12
+        %dt.form__item
+          = f.label :price_description, 'Price Description', class: 'form__label'
+        %dd.form__item
+          = f.text_area :price_description, class: 'form__field form__field--vert-resizeable'
+    .form__group
+      = f.submit "Create Kind", class: 'btn btn-primary'
