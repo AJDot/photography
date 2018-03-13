@@ -1,63 +1,5 @@
 = content_for :head do
-  :javascript
-    $(document).on("turbolinks:load", function() {
-      var SessionFilterer = {
-        Filter: {
-          bindEvents: function() {
-            $('.sessions-filter__button, .sessions-filter__link').on('click', function(event) {
-              $('.sessions-filter__list').toggleClass('sessions-filter__list--opened');
-            });
-
-            $('.sessions-filter__list').on('click', 'a', function(event) {
-              $a = $(this);
-              $li = $a.closest('.sessions-filter__item');
-              $('.sessions-filter__item').removeClass('active');
-              $li.addClass('active');
-            });
-          },
-
-          rotate: function() {
-            var $items = $('.sessions-filter__item');
-            var count = $items.length;
-            $items.each(function(index) {
-              $(this).css({
-                transform: "rotate(" + (-index * 360 / count) + "deg)"
-              });
-            });
-          },
-
-          init: function() {
-            this.rotate();
-            this.bindEvents();
-          }
-        },
-
-        filterSessions: function(event) {
-          event.preventDefault();
-          var kind = $(event.currentTarget).data("kind");
-          var $cards = $(".session-card");
-          var kindFilter = '[data-kind="' + kind + '"]';
-          var $picked = $cards.filter(kindFilter);
-          var $notPicked = $cards.not(kindFilter);
-
-          $picked.show();
-          $notPicked.hide();
-          this.updateButton(kind);
-        },
-
-        updateButton: function(kind) {
-          var $button = $('.sessions-filter__button')
-          $button.text(kind);
-        },
-
-        bindEvents: function() {
-          this.Filter.init();
-          $('.sessions-filter__link').on('click', this.filterSessions.bind(this));
-        }
-      }
-
-      SessionFilterer.bindEvents();
-    });
+  = javascript_include_tag "sessions_filter"
 
 %section.sessions
   %h2.sessions__title
@@ -65,15 +7,17 @@
     .sessions-filter
       %button.sessions-filter__button Filter
       %ul.sessions-filter__list
-        - Kind.all.each_with_index do |kind, ind|
+        - @kinds.each_with_index do |kind, ind|
           %li(class="sessions-filter__item sessions-filter__item--#{ind}")
             %a.sessions-filter__link(href="#" data-kind="#{kind.name}")
               %span.sessions-filter__link--icon= kind.name
 
+    - x = Math.cos(2 * Math::PI / @kinds.count) * 0.5 + 0.5
+    - y = -(Math.sin(2 * Math::PI / @kinds.count) * 0.5 - 0.5)
     %svg(height="0" width="0")
       %defs
         %clipPath(clipPathUnits="objectBoundingBox" id="sector")
-          %path(fill="none" stroke="#111" stroke-width="1" class="sector" d="M0.5,0.5 l0.5,0 A0.5,0.5 0 0,0 0.5,0 z")
+          %path(fill="none" stroke="#111" stroke-width="1" class="sector" d="M0.5,0.5 l0.5,0 A0.5,0.5 0 0,0 #{x},#{y} z")
 
   %ul.sessions__list
     - @sessions.each_with_index do |sess, ind|

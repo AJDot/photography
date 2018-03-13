@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
   def index
     @sessions = Session.all
+    @kinds = Kind.select { |k| k.sessions.count > 0 }
   end
 
   def new
