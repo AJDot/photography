@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  has_many :sessions
   mount_uploader :portrait, UserPortraitUploader
 
   has_secure_password
