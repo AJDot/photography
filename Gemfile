@@ -33,6 +33,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'jquery-rails'
 gem 'pg'
 gem 'haml'
+gem 'font-awesome-sass'
 
 # Use figaro for environment variable handling
 gem 'figaro'
