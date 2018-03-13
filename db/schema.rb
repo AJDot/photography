@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 20180313003955) do
   enable_extension "plpgsql"
 
   create_table "kinds", force: :cascade do |t|
+    t.string "name"
     t.text "gist"
     t.text "description"
     t.integer "price"
