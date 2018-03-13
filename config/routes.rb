@@ -9,6 +9,6 @@ Rails.application.routes.draw do
     end
   end
   resources :users, only: [:edit, :update]
-  resources :kinds, only: [:new, :create]
+  resources :kinds, only: [:index, :new, :create]
   resources :sessions, only: [:new, :create]
 end

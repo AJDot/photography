@@ -1,0 +1,9 @@
+%section.kinds
+  - @kinds.each do |kind|
+    = link_to "#", class: 'kinds__link' do
+      %article.kind
+        .kind__img-container
+          %img.kind__img(src="#{kind.cover}")
+        .kind__content
+          %h2.kind__name= kind.name
+          %p.kind__desc= kind.description
