@@ -1,4 +1,4 @@
-class UserPortraitUploader < CarrierWave::Uploader::Base
+class SessionImageUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
@@ -14,7 +14,7 @@ class UserPortraitUploader < CarrierWave::Uploader::Base
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
     if Rails.env.test?
-      "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.name}"
+      "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.title}"
     else
       "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
     end
@@ -35,12 +35,10 @@ class UserPortraitUploader < CarrierWave::Uploader::Base
   #   # do something
   # end
 
-  process resize_to_fill: [600, 600]
-
   # Create different versions of your uploaded files:
-  # version :thumb do
-  #   process resize_to_fit: [50, 50]
-  # end
+  version :thumb do
+    process resize_to_fit: [100, 100]
+  end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:

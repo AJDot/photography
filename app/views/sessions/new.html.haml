@@ -1,0 +1,40 @@
+%section.admin_create_session
+  = form_for @session do |f|
+    %fieldset
+      %dl.form__group.form__group--6of12
+        %dt.form__item
+          = f.label :title, 'Title', class: 'form__label'
+        %dd.form__item
+          = f.text_field :title, class: 'form__field'
+      %dl.form__group.form__group--6of12
+        %dt.form__item
+          = f.label :date, 'Date', class: 'form__label'
+        %dd.form__item
+          = f.date_field :date, class: 'form__field'
+      %dl.form__group.form__group--6of12
+        %dt.form__item
+          = f.label :gist, 'Gist', class: 'form__label'
+        %dd.form__item
+          = f.text_field :gist, class: 'form__field'
+      %dl.form__group.form__group--6of12
+        %dt.form__item
+          = f.label :kind_id, 'Kind', class: 'form__label'
+        %dd.form__item
+          = f.select :kind_id, options_for_select(Kind.all.collect { |k| [k.name, k.id] }), {}, class: 'form__field'
+      %dl.form__group.form__group--6of12
+        %dt.form__item
+          = f.label :description, 'Description', class: 'form__label'
+        %dd.form__item
+          = f.text_area :description, class: 'form__field form__field--vert-resizeable'
+      %dl.form__group.form__group--6of12
+        %dt.form__item
+          = f.label :cover, 'Cover', class: 'form__label'
+        %dd.form__item
+          = f.file_field :cover, class: 'form__field'
+      %dl.form__group.form__group--6of12
+        %dt.form__item
+          = f.label :images, 'Images', class: 'form__label'
+        %dd.form__item
+          = f.file_field :images, class: 'form__field', multiple: true
+    .form__group
+      = f.submit 'Create Session', class: 'btn btn--primary'

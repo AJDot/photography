@@ -1,0 +1,44 @@
+%section.admin_edit_user
+  %form
+    %fieldset
+      %dl.form__group.form__group--6of12
+        %dt.form__item
+          %label.form__label Title
+        %dd.form__item
+          %input.form__field(type="text" value="Kent Family")
+      %dl.form__group.form__group--6of12
+        %dt.form__item
+          %label.form__label Date
+        %dd.form__item
+          %input.form__field(type="date")
+      %dl.form__group.form__group--6of12
+        %dt.form__item
+          %label.form__label Gist
+        %dd.form__item
+          %input.form__field(type="text")
+      %dl.form__group.form__group--6of12
+        %dt.form__item
+          %label.form__label Kind
+        %dd.form__item
+          %select.form__field
+            %option Family
+            %option Engagement
+            %option Newborn
+            %option Portrait
+      %dl.form__group
+        %dt.form__item
+          %label.form__label Description
+        %dd.form__item
+          %textarea.form__field
+      %dl.form__group.form__group--6of12
+        %dt.form__item
+          %label.form__label Cover
+        %dd.form__item
+          %input.form__field(type="file")
+      %dl.form__group.form__group--6of12
+        %dt.form__item
+          %label.form__label Images
+        %dd.form__item
+          %input.form__field(type="file" multiple=true)
+    .form__group
+      %input.btn.btn--primary(type="submit" value="Create Session")
