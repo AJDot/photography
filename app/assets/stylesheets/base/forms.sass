@@ -1,19 +1,22 @@
 .form
-  @at-root #{&}__group
+  &__group
     float: left
     width: 100%
     padding: 5px 10px
     margin-bottom: 20px
     box-sizing: border-box
 
-    @at-root #{&}--6of12
+    &--6of12
       width: 50%
 
-  @at-root #{&}__label
+    &--right
+      float: right
+
+  &__label
     padding-left: 5px
     text-transform: uppercase
 
-  @at-root #{&}__field
+  &__field
     width: 100%
     min-height: 3em
     padding: 10px
@@ -30,6 +33,29 @@
       border-color: $dark-green
       background: $gray
 
-    @at-root #{&}--vert-resizeable
+    &--vert-resizeable
       min-height: 200px
       resize: vertical
+
+.form-addon-group
+  display: table
+  border-collapse: separate
+  &__addon
+    display: table-cell
+    width: 1%
+    padding: 0 10px
+    background: #cccccc
+    border: 1px solid #cccccc
+    border-right: none
+    box-sizing: border-box
+    transition: border-color $t-speed $t-func, background $t-speed $t-func
+  &__item
+    width: 100%
+    display: table-cell
+    border-left: none
+    border-top-left-radius: 0
+    border-bottom-left-radius: 0
+    box-sizing: border-box
+  &:focus-within &__addon,
+  &:hover &__addon
+    border-color: $dark-green

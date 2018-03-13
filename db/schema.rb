@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20180313003955) do
     t.integer "price"
     t.text "price_description"
     t.string "banner"
-    t.string "cover_image"
+    t.string "cover"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20180313003955) do
     t.text "gist"
     t.text "description"
     t.json "images"
-    t.string "cover_image"
+    t.string "cover"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

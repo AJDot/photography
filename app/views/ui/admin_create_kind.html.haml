@@ -1,0 +1,44 @@
+%section.admin_create_kind
+  %form
+    %fieldset
+      %dl.form__group.form__group--6of12
+        %dt.form__item
+          %label.form__label Name
+        %dd.form__item
+          %input.form__field(type="text" value="Portrait")
+      %dl.form__group.form__group--6of12
+        %dt.form__item
+          %label.form__label Gist
+        %dd.form__item
+          %input.form__field(type="text" value="A relaxed photoshoot where you can be yourself.")
+      %dl.form__group
+        %dt.form__item
+          %label.form__label Description
+        %dd.form__item
+          %textarea.form__field.form__field--vert-resizeable
+            This is a longer description that could be used to provide extra details for people who may be looking for such things.
+      %dl.form__group.form__group--6of12
+        %dt.form__item
+          %label.form__label Banner
+        %dd.form__item
+          %input.form__field(type="file")
+      %dl.form__group.form__group--6of12
+        %dt.form__item
+          %label.form__label Cover
+        %dd.form__item
+          %input.form__field(type="file")
+      %dl.form__group.form__group--6of12
+        %dt.form__item
+          %label.form__label Price
+        %dd.form__item.form-addon-group
+          %span.form-addon-group__addon
+            %i.fas.fa-dollar-sign
+          %input.form__field.form-addon-group__item(type="number" step="0.01" min="0" placeholder="1399.99")
+      %dl.form__group.form__group--6of12
+        %dt.form__item
+          %label.form__label Price Description
+        %dd.form__item
+          %textarea.form__field.form__field--vert-resizeable
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tincidunt turpis purus, nec euismod mauris convallis non. Quisque facilisis nibh ac ligula blandit, non finibus ipsum pretium. Aliquam erat volutpat. Aenean eget iaculis sem. Phasellus et pellentesque elit, sit amet sagittis mauris. Morbi suscipit scelerisque neque. Donec urna nunc, consectetur vitae aliquam semper, ultrices ut sem. Integer suscipit neque dictum, euismod nisl eu, auctor magna. Proin elementum semper dolor, a lobortis sem feugiat ut. Nulla eget tincidunt orci. Etiam eu pretium risus. Suspendisse sollicitudin odio ac magna pretium, at vestibulum urna viverra. Integer ullamcorper tristique diam, sit amet convallis sem volutpat ac. Mauris gravida arcu vitae sem placerat, in dignissim orci accumsan. Cras id quam vitae justo varius aliquet.
+    .form__group
+      %input.btn.btn--primary(type="submit" value="Create")

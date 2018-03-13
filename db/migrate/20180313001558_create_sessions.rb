@@ -6,7 +6,7 @@ class CreateSessions < ActiveRecord::Migration[5.1]
       t.date :date
       t.text :gist, :description
       t.json :images
-      t.string :cover_image
+      t.string :cover
       t.timestamps
     end
   end
