@@ -82,4 +82,67 @@ describe SessionsController do
       end
     end
   end
+
+  describe 'GET edit' do
+    it 'sets @session to selected session' do
+      alice = Fabricate(:user)
+      kind = Fabricate(:kind)
+      sess = Fabricate(:session, creator: alice, kind: kind)
+
+      get :edit, params: { id: sess.id }
+      expect(assigns(:session)).to eq(sess)
+    end
+  end
+
+  describe 'PATCH update' do
+    context 'with valid inputs' do
+      let(:alice) { Fabricate(:user) }
+      let(:kind) { Fabricate(:kind) }
+      let(:sess) { Fabricate(:session, title: 'old title', creator: alice, kind: kind) }
+
+      before do
+        attrs = sess.attributes.merge("title" => 'new title')
+        attrs["images"] = attrs["images"].map { |i| fixture_file_upload(i) }
+        attrs["cover"] = fixture_file_upload(attrs["cover"])
+        patch :update, params: { session: attrs, id: sess.id }
+      end
+
+      it 'updates session' do
+        expect(Session.first.title).to eq('new title')
+      end
+
+      it 'sets the flash success message' do
+        expect(flash[:success]).to be_present
+      end
+
+      it 'redirect to the root path' do
+        expect(response).to redirect_to root_path
+      end
+    end
+
+    context 'with invalid inputs' do
+      let(:alice) { Fabricate(:user) }
+      let(:kind) { Fabricate(:kind) }
+      let(:sess) { Fabricate(:session, title: 'old title', creator: alice, kind: kind) }
+
+      before do
+        attrs = sess.attributes.merge("title" => '')
+        attrs["images"] = attrs["images"].map { |i| fixture_file_upload(i) }
+        attrs["cover"] = fixture_file_upload(attrs["cover"])
+        patch :update, params: { session: attrs, id: sess.id }
+      end
+
+      it 'does not update session' do
+        expect(Session.first.title).to eq('old title')
+      end
+
+      it 'sets flash danger message' do
+        expect(flash[:danger]).to be_present
+      end
+
+      it 'renders the new template' do
+        expect(response).to render_template :edit
+      end
+    end
+  end
 end

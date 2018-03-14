@@ -11,5 +11,5 @@ Rails.application.routes.draw do
   get 'home', to: 'pages#home', as: 'home'
   resources :users, only: [:edit, :update]
   resources :kinds, only: [:index, :new, :create, :edit, :update]
-  resources :sessions, only: [:index, :new, :create, :show]
+  resources :sessions, only: [:index, :new, :create, :show, :edit, :update]
 end

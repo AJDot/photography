@@ -5,10 +5,6 @@
   %li
     %a(href="#") Pricing & Contact
   %li
-    %a(href="#") Edit Kind
-  %li
-    %a(href="#") Edit Session (including updating images)
-  %li
     %a(href="#") Prints
   %li
     %a(href="#") About
@@ -30,6 +26,10 @@
   %li
     = link_to 'Admin Create New Kind', new_kind_path
   %li
+    = link_to 'Admin Edit Kind', edit_kind_path(Kind.first)
+  %li
     = link_to 'Admin Create New Session', new_session_path
+  %li
+    = link_to 'Admin Edit Session', edit_session_path(Session.first)
   %li
     = link_to 'Admin Edit Profile', edit_user_path(User.first)
