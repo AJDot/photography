@@ -1,9 +1,10 @@
 %nav.nav
   %ul.nav__list
+    - base_classes = "nav__link btn-min btn-min--light "
     %li.nav__list-item
-      %a.nav__link.nav__link--active.btn-min.btn-min--light(href="#") Home
+      = link_to 'Home', home_path, class: base_classes + active_class(home_path, "nav__link--active")
     %li.nav__list-item
-      %a.nav__link.btn-min.btn-min--light(href="#") Portfolio
+      = link_to 'Portfolio', sessions_path, class: base_classes + active_class(sessions_path, "nav__link--active")
     %li.nav__list-item
       %a.nav__link.btn-min.btn-min--light(href="#") Pricing
     %li.nav__list-item
