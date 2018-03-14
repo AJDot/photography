@@ -1,6 +1,14 @@
 require 'rails_helper'
 
 describe KindsController do
+  describe 'GET index' do
+    it 'sets @kinds to all kinds' do
+      Fabricate.times(3, :kind)
+      get :index
+      expect(assigns(:kinds).count).to eq(3)
+    end
+  end
+
   describe 'GET new' do
     it 'sets @kind to a new kind' do
       get :new

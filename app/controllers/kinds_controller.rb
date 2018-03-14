@@ -2,6 +2,7 @@ class KindsController < ApplicationController
   def index
     @kinds = Kind.all
   end
+
   def new
     @kind = Kind.new
   end

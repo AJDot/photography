@@ -1,6 +1,27 @@
 require 'rails_helper'
 
 describe SessionsController do
+  describe 'GET index' do
+    before do
+      Fabricate.times(3, :kind)
+      Fabricate.times(3, :session, creator: Fabricate(:user), kind: Kind.first)
+      get :index
+    end
+
+    it 'sets @sessions to a all sessions' do
+      expect(assigns(:sessions).count).to eq(3)
+    end
+
+    it 'sets @kinds to an array of kind objects' do
+      expect(assigns(:kinds).class).to eq(Array)
+      expect(assigns(:kinds).first).to be_instance_of Kind
+    end
+
+    it 'sets @kinds to an array of kind objects that have at least 1 session' do
+      expect(assigns(:kinds).count).to eq(1)
+    end
+  end
+
   describe 'GET new' do
     it 'sets @session to a new session' do
       get :new
