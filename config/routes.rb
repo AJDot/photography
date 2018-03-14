@@ -12,6 +12,6 @@ Rails.application.routes.draw do
   resources :users, only: [:edit, :update]
   resources :kinds, only: [:index, :new, :create, :edit, :update]
   resources :sessions, only: [:index, :new, :create, :show, :edit, :update] do
-    resources :images, only: [:create], controller: 'session_images'
+    resources :images, only: [:create, :destroy], controller: 'session_images'
   end
 end
