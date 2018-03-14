@@ -1,0 +1,22 @@
+= content_for :head do
+  = javascript_include_tag "slideshow", "data-turbolinks-track" => "reload"
+
+%section.session
+  %h2.session__title= @session.title
+  #slideshow.slideshow
+    .slideshow__slides
+      - @session.images.each_with_index do |image, index|
+        %figure.slideshow__figure(data-id="#{index}")
+          %img(src="#{image}" alt="PHOTO")
+    %ul#thumbnails.thumbnails
+      - @session.images.each_with_index do |image, index|
+        %li.thumbnails__item(data-id="#{index}")
+          %a(href="#")
+            %img(src="#{image.thumb}" alt="THUMBNAIL")
+    %ul
+      %li
+        %a.prev(href="#")
+          %i.material-icons navigate_before
+      %li
+        %a.next(href="#")
+          %i.material-icons navigate_next

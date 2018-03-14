@@ -22,6 +22,14 @@ describe SessionsController do
     end
   end
 
+  describe 'GET show' do
+    it 'sets @session to selected session' do
+      sess = Fabricate(:session, creator: Fabricate(:user), kind: Fabricate(:kind))
+      get :show, params: { id: sess.id }
+      expect(assigns(:session)).to eq(sess)
+    end
+  end
+
   describe 'GET new' do
     it 'sets @session to a new session' do
       get :new

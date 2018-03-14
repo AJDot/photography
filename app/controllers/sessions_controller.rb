@@ -4,6 +4,10 @@ class SessionsController < ApplicationController
     @kinds = Kind.select { |k| k.sessions.count > 0 }
   end
 
+  def show
+    @session = Session.find params[:id]
+  end
+
   def new
     @session = Session.new
   end
