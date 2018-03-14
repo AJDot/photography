@@ -3,6 +3,17 @@
 
 %section.session
   %h2.session__title= @session.title
+
+  = form_for @session, url: session_images_path(@session), html: { class: 'clearfix' }, method: 'POST' do |f|
+    %fieldset
+      %dl.form__group.form__group--6of12
+        %dt.form__item
+          = f.label :images, 'Images', class: 'form__label'
+        %dd.form__item
+          = f.file_field :images, class: 'form__field', multiple: true
+    .form__group
+      = f.submit 'Add Images', class: 'btn btn-primary'
+
   #slideshow.slideshow
     .slideshow__slides
       - @session.images.each_with_index do |image, index|
