@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'pages#home'
+  root to: 'pages#index'
 
   get 'ui', to: 'ui#index'
   Dir.glob('app/views/ui/*.html.haml').sort.each do |file|
@@ -10,6 +10,6 @@ Rails.application.routes.draw do
   end
   get 'home', to: 'pages#home', as: 'home'
   resources :users, only: [:edit, :update]
-  resources :kinds, only: [:index, :new, :create]
+  resources :kinds, only: [:index, :new, :create, :edit, :update]
   resources :sessions, only: [:index, :new, :create, :show]
 end

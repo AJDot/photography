@@ -1,4 +1,6 @@
 = content_for :head do
+  :javascript
+    var filter = "#{@filter}";
   = javascript_include_tag "sessions_filter", "data-turbolinks-track" => "reload"
 
 %section.sessions

@@ -2,6 +2,7 @@ class SessionsController < ApplicationController
   def index
     @sessions = Session.all
     @kinds = Kind.select { |k| k.sessions.count > 0 }
+    @filter = params[:kind] || ""
   end
 
   def show

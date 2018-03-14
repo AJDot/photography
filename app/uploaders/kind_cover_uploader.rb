@@ -14,7 +14,7 @@ class KindCoverUploader < CarrierWave::Uploader::Base
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
     if Rails.env.test?
-      "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.name}"
+      "#{Rails.root}/spec/support/uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.name}"
     else
       "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
     end

@@ -1,6 +1,6 @@
 %section.kinds
   - @kinds.each do |kind|
-    = link_to "#", class: 'kinds__link' do
+    = link_to sessions_path(kind: kind.name), class: 'kinds__link' do
       %article.kind
         .kind__img-container
           %img.kind__img(src="#{kind.cover}")

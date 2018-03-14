@@ -18,6 +18,21 @@ class KindsController < ApplicationController
     end
   end
 
+  def edit
+    @kind = Kind.find params[:id]
+  end
+
+  def update
+    @kind = Kind.find params[:id]
+    if @kind.update(kind_params)
+      flash[:success] = 'You have updated this kind.'
+      redirect_to root_path
+    else
+      flash[:danger] = 'There was an problem processing the form. Please correct the errors below.'
+      render :edit
+    end
+  end
+
   private
 
   def kind_params

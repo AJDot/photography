@@ -26,3 +26,6 @@
 
 # Ignore locally uploaded files
 /public/uploads
+
+# Ignore uploaded files from tests
+/spec/support/uploads

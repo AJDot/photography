@@ -1,5 +1,6 @@
 $(document).on('turbolinks:load', function() {
   var SessionFilterer = {
+    $cards: $(".session-card"),
     Filter: {
       bindEvents: function() {
         $('.sessions-filter__button, .sessions-filter__link').on('click', function(event) {
@@ -33,14 +34,17 @@ $(document).on('turbolinks:load', function() {
     filterSessions: function(event) {
       event.preventDefault();
       var kind = $(event.currentTarget).data("kind");
-      var $cards = $(".session-card");
+      this.renderFilter(kind);
+      this.updateButton(kind);
+    },
+
+    renderFilter: function(kind) {
       var kindFilter = '[data-kind="' + kind + '"]';
-      var $picked = $cards.filter(kindFilter);
-      var $notPicked = $cards.not(kindFilter);
+      var $picked = this.$cards.filter(kindFilter);
+      var $notPicked = this.$cards.not(kindFilter);
 
       $picked.show();
       $notPicked.hide();
-      this.updateButton(kind);
     },
 
     updateButton: function(kind) {
@@ -51,8 +55,16 @@ $(document).on('turbolinks:load', function() {
     bindEvents: function() {
       this.Filter.init();
       $('.sessions-filter__link').on('click', this.filterSessions.bind(this));
+    },
+
+    init: function(kind) {
+      this.bindEvents();
+      if (kind !== "") {
+        this.renderFilter(kind);
+        this.updateButton(kind);
+      }
     }
   }
 
-  SessionFilterer.bindEvents();
+  SessionFilterer.init(filter);
 });
