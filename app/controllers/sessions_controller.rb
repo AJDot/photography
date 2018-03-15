@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+
   def index
     @sessions = Session.all
     @kinds = Kind.select { |k| k.sessions.count > 0 }
@@ -41,9 +43,21 @@ class SessionsController < ApplicationController
     end
   end
 
+  def destroy
+    sess = Session.find params[:id]
+    sess.destroy
+    flash[:success] = "The session \"#{sess.title}\" was removed."
+    redirect_to sessions_path
+  end
+
   private
 
   def session_params
     params.require(:session).permit(:title, :date, :kind_id, :gist, :description, :cover, {images: []})
+  end
+
+  def record_not_found
+    flash[:danger] = "A session with id #{params[:id]} does not exist!"
+    redirect_to sessions_path
   end
 end

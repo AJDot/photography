@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 describe SessionsController do
+
   describe 'GET index' do
     before do
       Fabricate.times(3, :kind)
@@ -92,6 +93,10 @@ describe SessionsController do
       get :edit, params: { id: sess.id }
       expect(assigns(:session)).to eq(sess)
     end
+
+    it_behaves_like 'session not found' do
+      let(:action) { get :edit, params: { id: 1 } }
+    end
   end
 
   describe 'PATCH update' do
@@ -143,6 +148,38 @@ describe SessionsController do
       it 'renders the new template' do
         expect(response).to render_template :edit
       end
+    end
+
+    it_behaves_like 'session not found' do
+      let(:action) { patch :update, params: { id: 1 } }
+    end
+  end
+
+  describe 'DELETE destroy' do
+    context 'with an existing session' do
+      let(:alice) { Fabricate(:user) }
+      let(:kind) { Fabricate(:kind) }
+      let(:sess) { Fabricate(:session, title: 'old title', creator: alice, kind: kind) }
+
+      before do
+        delete :destroy, params: { id: sess.id }
+      end
+
+      it 'deletes the session' do
+        expect(Session.count).to eq(0)
+      end
+
+      it 'redirects to the sessions index page' do
+        expect(response).to redirect_to sessions_path
+      end
+
+      it 'sets the flash success message' do
+        expect(flash[:success]).to be_present
+      end
+    end
+
+    it_behaves_like 'session not found' do
+      let(:action) { delete :destroy, params: { id: 1 } }
     end
   end
 end

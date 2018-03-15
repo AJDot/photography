@@ -3,13 +3,21 @@
   %li
     %a(href="#") Full Home Page
   %li
-    %a(href="#") Pricing & Contact
+    %a(href="#") Pricing
+  %li
+    %a(href="#") Book Me
   %li
     %a(href="#") Prints
   %li
     %a(href="#") About
   %li
+    %p Footer
+  %li
     %p Restrict resource CrUD to admin
+  %li
+    %p Delete Kind
+  %li
+    %p Delete Session
 
 %hr
 
@@ -22,6 +30,12 @@
   %li
     = link_to 'Sessions Index', sessions_path
   %li
+    = link_to 'Session', session_path(Session.first)
+  %li
+    = link_to 'Add Images to Session', session_path(Session.first)
+  %li
+    = link_to 'Delete Image from Session', session_path(Session.first)
+  %li
     = link_to 'Admin Create New Session', new_session_path
   %li
     = link_to 'Admin Create New Kind', new_kind_path
@@ -31,9 +45,5 @@
     = link_to 'Admin Create New Session', new_session_path
   %li
     = link_to 'Admin Edit Session', edit_session_path(Session.first)
-  %li
-    %p Add Images to Session
-  %li
-    %p Delete Image from Session
   %li
     = link_to 'Admin Edit Profile', edit_user_path(User.first)

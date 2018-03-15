@@ -4,14 +4,14 @@
 %section.session
   %h2.session__title= @session.title
 
-  = form_for @session, url: session_images_path(@session), html: { class: 'clearfix' }, method: 'POST' do |f|
+  = form_for @session, url: session_images_path(@session), html: { multipart: true, class: 'clearfix' }, method: 'POST' do |f|
     %fieldset
       %dl.form__group.form__group--6of12
         %dt.form__item
           = f.label :images, 'Images', class: 'form__label'
         %dd.form__item
           = f.file_field :images, class: 'form__field', multiple: true
-    .form__group
+    .form__group.form__group--6of12
       = f.submit 'Add Images', class: 'btn btn-primary'
 
   - if @session.images.empty?
@@ -22,7 +22,7 @@
         - @session.images.each_with_index do |image, index|
           %figure.slideshow__figure(data-id="#{index}")
             %img(src="#{image}" alt="PHOTO")
-            = link_to "Delete", session_image_path(@session, index), method: :delete, class: 'slideshow__delete', data: { confirm: "Are you sure you want to delete this image?" }
+            = link_to "Delete Image", session_image_path(@session, index), method: :delete, class: 'btn-delete btn-delete--top-right', data: { confirm: "Are you sure you want to delete this image?" }
       %ul#thumbnails.thumbnails
         - @session.images.each_with_index do |image, index|
           %li.thumbnails__item(data-id="#{index}")
@@ -35,3 +35,5 @@
         %li
           %a.next(href="#")
             %i.material-icons navigate_next
+
+= link_to "Delete Session", session_path(@session), method: :delete, class: 'btn-delete', data: { confirm: "Are you sure you want to delete the session \"#{@session.title}\"?" }
