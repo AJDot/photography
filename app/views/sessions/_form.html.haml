@@ -36,4 +36,4 @@
       %dd.form__item
         = f.file_field :images, class: 'form__field', multiple: true
   .form__group
-    = f.submit sess.new_record? ? 'Create Session' : 'Update Session', class: 'btn btn-primary'
+    = f.submit sess.new_record? ? 'Create Session' : 'Update Session', class: 'btn btn--wide'

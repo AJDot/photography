@@ -3,6 +3,8 @@
     var filter = "#{@filter}";
   = javascript_include_tag "sessions_filter", "data-turbolinks-track" => "reload"
 
+= link_to "Create New Session", new_session_path, class: 'btn'
+
 %section.sessions
   %h2.sessions__title
     %span Sessions

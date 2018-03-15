@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   end
   get 'home', to: 'pages#home', as: 'home'
   resources :users, only: [:edit, :update]
-  resources :kinds, only: [:index, :new, :create, :edit, :update]
+  resources :kinds, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :sessions do
     resources :images, only: [:create, :destroy], controller: 'session_images'
   end

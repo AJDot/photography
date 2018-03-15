@@ -1,4 +1,6 @@
 class KindsController < ApplicationController
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+
   def index
     @kinds = Kind.all
   end
@@ -33,9 +35,21 @@ class KindsController < ApplicationController
     end
   end
 
+  def destroy
+    kind = Kind.find params[:id]
+    kind.destroy
+    flash[:success] = "The session \"#{kind.name}\" was removed."
+    redirect_to kinds_path
+  end
+
   private
 
   def kind_params
     params.require(:kind).permit(:name, :gist, :description, :banner, :cover, :price, :price_description)
+  end
+
+  def record_not_found
+    flash[:danger] = "A kind with id #{params[:id]} does not exist!"
+    redirect_to kinds_path
   end
 end

@@ -66,6 +66,10 @@ describe KindsController do
       get :edit, params: { id: kind.id }
       expect(assigns(:kind)).to eq(kind)
     end
+
+    it_behaves_like 'kind not found' do
+      let(:action) { get :edit, params: { id: 1 } }
+    end
   end
 
   describe 'PATCH update' do
@@ -113,6 +117,42 @@ describe KindsController do
       it 'renders the new template' do
         expect(response).to render_template :edit
       end
+    end
+
+    it_behaves_like 'kind not found' do
+      let(:action) { patch :update, params: { id: 1 } }
+    end
+  end
+
+  describe 'DELETE destroy' do
+    context 'with an existing kind' do
+      let(:alice) { Fabricate(:user) }
+      let(:kind) { Fabricate(:kind) }
+      let(:sess) { Fabricate(:session, title: 'old title', creator: alice, kind: kind) }
+
+      before do
+        delete :destroy, params: { id: kind.id }
+      end
+
+      it 'deletes the kind' do
+        expect(Kind.count).to eq(0)
+      end
+
+      it 'deletes associated sessions' do
+        expect(Session.count).to eq(0)
+      end
+
+      it 'redirects to the kinds index page' do
+        expect(response).to redirect_to kinds_path
+      end
+
+      it 'sets the flash success message' do
+        expect(flash[:success]).to be_present
+      end
+    end
+
+    it_behaves_like 'kind not found' do
+      let(:action) { delete :destroy, params: { id: 1 } }
     end
   end
 end

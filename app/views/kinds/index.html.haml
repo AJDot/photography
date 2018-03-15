@@ -1,9 +1,17 @@
+= link_to "Create New Kind", new_kind_path, class: 'btn'
+
 %section.kinds
-  - @kinds.each do |kind|
-    = link_to sessions_path(kind: kind.name), class: 'kinds__link' do
-      %article.kind
-        .kind__img-container
-          %img.kind__img(src="#{kind.cover}")
-        .kind__content
-          %h2.kind__name= kind.name
-          %p.kind__desc= kind.description
+  - if @kinds.empty?
+    %p There are no kinds! Add a kind using the link on this page.
+  - else
+    - @kinds.each do |kind|
+      .kind__container
+        = link_to sessions_path(kind: kind.name), class: 'kinds__link' do
+          %article.kind
+            .kind__img-container
+              %img.kind__img(src="#{kind.cover}")
+            .kind__content
+              %h2.kind__name= kind.name
+              %p.kind__desc= kind.description
+
+        = link_to "Delete", kind_path(kind), method: :delete, class: 'btn-delete btn-delete--bottom-right', data: { confirm: "Are you sure you want to delete the kind \"#{kind.name}\"?" }
