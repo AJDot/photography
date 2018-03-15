@@ -56,8 +56,8 @@ describe SessionsController do
         expect(flash[:success]).to be_present
       end
 
-      it 'redirects to the root path' do
-        expect(response).to redirect_to root_path
+      it 'redirects to the session page' do
+        expect(response).to redirect_to session_path(Session.first)
       end
     end
 
@@ -120,8 +120,8 @@ describe SessionsController do
         expect(flash[:success]).to be_present
       end
 
-      it 'redirect to the root path' do
-        expect(response).to redirect_to root_path
+      it 'redirect to the session page' do
+        expect(response).to redirect_to session_path(sess)
       end
     end
 

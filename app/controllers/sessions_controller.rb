@@ -19,9 +19,10 @@ class SessionsController < ApplicationController
     @user = User.first
     @session = Session.new(session_params)
     @session.creator = @user
+    binding.pry
     if @session.save
       flash[:success] = 'You have created a session.'
-      redirect_to root_path
+      redirect_to session_path(@session)
     else
       flash[:danger] = 'There was an problem processing the form. Please correct the errors below.'
       render :new
@@ -36,7 +37,7 @@ class SessionsController < ApplicationController
     @session = Session.find params[:id]
     if @session.update(session_params)
       flash[:success] = 'You have updated this session.'
-      redirect_to root_path
+      redirect_to session_path(@session)
     else
       flash[:danger] = 'There was an problem processing the form. Please correct the errors below.'
       render :edit

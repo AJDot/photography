@@ -12,7 +12,7 @@
         %dd.form__item
           = f.file_field :images, class: 'form__field', multiple: true
     .form__group.form__group--6of12
-      = f.submit 'Add Images', class: 'btn btn-primary'
+      = f.submit 'Add Images', class: 'btn btn--wide'
 
   - if @session.images.empty?
     %p This session is empty! Add images using the form on this page.

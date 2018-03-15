@@ -14,10 +14,6 @@
     %p Footer
   %li
     %p Restrict resource CrUD to admin
-  %li
-    %p Delete Kind
-  %li
-    %p Delete Session
 
 %hr
 
@@ -26,24 +22,26 @@
   %li
     = link_to 'Home', home_path
   %li
-    = link_to 'Kinds Index', kinds_path
+    = link_to 'Admin Edit Profile', edit_user_path(User.first)
   %li
-    = link_to 'Sessions Index', sessions_path
+    = link_to 'Admin Create New Kind', new_kind_path
   %li
-    = link_to 'Session', session_path(Session.first)
+    = link_to 'View All Kinds', kinds_path
+  %li
+    = link_to 'Admin Edit Kind', edit_kind_path(Kind.first)
+  %li
+    = link_to 'Admin Delete Kind', kinds_path
+  %li
+    = link_to 'Admin Create New Session', new_session_path
+  %li
+    = link_to 'View All Sessions', sessions_path
+  %li
+    = link_to 'View Session', session_path(Session.first)
+  %li
+    = link_to 'Admin Edit Session', edit_session_path(Session.first)
+  %li
+    = link_to 'Admin Delete Session', session_path(Session.first)
   %li
     = link_to 'Add Images to Session', session_path(Session.first)
   %li
     = link_to 'Delete Image from Session', session_path(Session.first)
-  %li
-    = link_to 'Admin Create New Session', new_session_path
-  %li
-    = link_to 'Admin Create New Kind', new_kind_path
-  %li
-    = link_to 'Admin Edit Kind', edit_kind_path(Kind.first)
-  %li
-    = link_to 'Admin Create New Session', new_session_path
-  %li
-    = link_to 'Admin Edit Session', edit_session_path(Session.first)
-  %li
-    = link_to 'Admin Edit Profile', edit_user_path(User.first)

@@ -14,4 +14,4 @@
               %h2.kind__name= kind.name
               %p.kind__desc= kind.description
 
-        = link_to "Delete", kind_path(kind), method: :delete, class: 'btn-delete btn-delete--bottom-right', data: { confirm: "Are you sure you want to delete the kind \"#{kind.name}\"?" }
+        = link_to "Delete", kind_path(kind), method: :delete, class: 'btn-delete btn-delete--bottom-right', data: { confirm: "Are you sure you want to delete the kind \"#{kind.name}\"? NOTE: All sessions associated with this kind will also be removed." }

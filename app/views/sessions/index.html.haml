@@ -24,16 +24,19 @@
           %clipPath(clipPathUnits="objectBoundingBox" id="sector")
             %path(fill="none" stroke="#111" stroke-width="1" class="sector" d="M0.5,0.5 l0.5,0 A0.5,0.5 0 0,0 #{x},#{y} z")
 
-  %ul.sessions__list
-    - @sessions.each_with_index do |sess, ind|
-      %li.session-card(data-kind="#{sess.kind.name}")
-        = link_to session_path(sess), class: 'session-card__link' do
-          %img.session-card__img(src="#{sess.cover}")
-          .session-card__overlay
-            %ul.session-card__overlay-content
-              %li.session-card__time
-                %time(datetime="#{sess.date}")= sess.date
-              %li.session-card__title
-                %h3.session-card__title--inner= sess.title
-              %li.session-card__kind
-                %small= sess.kind.name
+  - if @sessions.empty?
+    %p There are no sessions! Add a session using the link on this page.
+  - else
+    %ul.sessions__list
+      - @sessions.each_with_index do |sess, ind|
+        %li.session-card(data-kind="#{sess.kind.name}")
+          = link_to session_path(sess), class: 'session-card__link' do
+            %img.session-card__img(src="#{sess.cover}")
+            .session-card__overlay
+              %ul.session-card__overlay-content
+                %li.session-card__time
+                  %time(datetime="#{sess.date}")= sess.date
+                %li.session-card__title
+                  %h3.session-card__title--inner= sess.title
+                %li.session-card__kind
+                  %small= sess.kind.name
