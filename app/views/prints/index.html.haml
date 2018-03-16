@@ -1,0 +1,31 @@
+= content_for :head do
+  = javascript_include_tag "slideshow", "data-turbolinks-track" => "reload"
+
+%section.prints
+  %h2.session__title Prints
+
+  .col.col--8of12
+    .slideshow-container
+      #slideshow.slideshow
+        .slideshow__slides
+          - @shop['Listings'].each_with_index do |listing, index|
+            %figure.slideshow__figure.print(data-id="#{index}")
+              %figcaption.print__data
+                %h3.print__title= listing['title']
+                %p.print__price= "$#{listing['price']}"
+                %a.btn.print__link(href="#{listing['url']}" target="_blank") View on Etsy
+              .print__img-container
+                %img(src="#{listing['Images'][0]['url_570xN']}" alt="PHOTO")
+        %ul
+          %li
+            %a.prev(href="#")
+              %i.material-icons navigate_before
+          %li
+            %a.next(href="#")
+              %i.material-icons navigate_next
+  .col.col--4of12.col--padded
+    %ul#thumbnails.thumbnails.thumbnails--static.print-thumbs.clearfix(data-dynamic=false)
+      - @shop['Listings'].each_with_index do |listing, index|
+        %li.thumbnails__item.print-thumb(data-id="#{index}")
+          %a.print-thumb__link(href="#")
+            %img.print-thumb__img(src="#{listing['Images'][0]['url_170x135']}" alt="THUMBNAIL")

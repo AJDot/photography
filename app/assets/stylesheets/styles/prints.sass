@@ -1,0 +1,57 @@
+.print
+  color: $gray
+  &__data
+    padding: 10px
+    background: $black--light
+    box-sizing: border-box
+  &__title
+    font-size: 1.5em
+    text-align: center
+  &__data
+    position: relative
+    width: 100%
+    height: 20%
+    font-size: 1.3em
+    text-align: center
+  &__link
+    position: absolute
+    bottom: 0
+    right: 0
+    margin: 5px
+    color: $gray
+    background: $black--light
+    border-color: $gray
+    &:hover
+      color: $black--light
+      background: $gray
+      border-color: $black--light
+  &__img-container
+    position: relative
+    width: 100%
+    height: 80%
+    vertical-align: middle
+
+.print-thumbs
+  position: relative
+.print-thumb
+  float: left
+  display: inline-block
+  width: 25%
+  height: 75px
+  box-sizing: border-box
+  &__link
+    display: block
+    width: 100%
+    height: 100%
+    padding: 10px
+    box-sizing: border-box
+    &:hover
+      background: $black
+    &.current
+      background: $dark-green
+      box-shadow: 0 0 10px 0 $black
+  &__img
+    width: 100%
+    height: 100%
+    object-fit: cover
+    vertical-align: middle

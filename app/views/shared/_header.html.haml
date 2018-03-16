@@ -11,7 +11,7 @@
       %a.nav__link(href="#")
         %img.header__logo(src="https://placehold.it/200x200")
     %li.nav__list-item
-      %a.nav__link.btn-min.btn-min--light(href="#") Prints
+      = link_to 'Prints', prints_path, class: base_classes + active_class(prints_path, "nav__link--active")
     %li.nav__list-item
       %a.nav__link.btn-min.btn-min--light(href="#") About
     %li.nav__list-item

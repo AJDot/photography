@@ -2,6 +2,11 @@
   position: relative
   margin: 0 auto
   box-shadow: 0 0 2px 0 #777
+  &__slides
+    position: relative
+    width: 100%
+    background: $dark-green
+    height: 80vh
   &__figure
     padding: 0
     margin: 0
@@ -16,11 +21,6 @@
       object-fit: contain
     & + &
       display: none
-  &__slides
-    position: relative
-    width: 100%
-    height: 80vh
-    background: $dark-green
   &::before,
   &::after
     content: ""
@@ -43,7 +43,7 @@
     right: 0
 
 
-.thumbnails
+.thumbnails--dynamic
   position: relative
   height: 100px
   height: 10vh
@@ -58,6 +58,8 @@
       width: 100%
       height: 100%
       box-sizing: border-box
+      &:hover
+        background: $black
       &.current
         background: $dark-green
         box-shadow: 0 0 10px 0 $black

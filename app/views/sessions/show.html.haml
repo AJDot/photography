@@ -23,9 +23,9 @@
           %figure.slideshow__figure(data-id="#{index}")
             %img(src="#{image}" alt="PHOTO")
             = link_to "Delete Image", session_image_path(@session, index), method: :delete, class: 'btn-delete btn-delete--top-right', data: { confirm: "Are you sure you want to delete this image?" }
-      %ul#thumbnails.thumbnails
+      %ul#thumbnails.thumbnails.thumbnails--dynamic(data-dynamic="true")
         - @session.images.each_with_index do |image, index|
-          %li.thumbnails__item(data-id="#{index}")
+          %li.thumbnails__item.thumbnails--dynamic__item(data-id="#{index}")
             %a(href="#")
               %img(src="#{image.thumb}" alt="THUMBNAIL")
       %ul

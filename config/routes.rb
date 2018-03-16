@@ -15,4 +15,5 @@ Rails.application.routes.draw do
   resources :sessions do
     resources :images, only: [:create, :destroy], controller: 'session_images'
   end
+  resources :prints, only: [:index]
 end
