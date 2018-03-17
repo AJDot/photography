@@ -13,6 +13,6 @@
     %li.nav__list-item
       = link_to 'Prints', prints_path, class: base_classes + active_class(prints_path, "nav__link--active")
     %li.nav__list-item
-      %a.nav__link.btn-min.btn-min--light(href="#") About
+      = link_to 'About', about_path, class: base_classes + active_class(about_path, "nav__link--active")
     %li.nav__list-item
-      %a.nav__link.btn-min.btn-min--light(href="#") Contact
+      = link_to 'Book Me', book_me_path, class: base_classes + active_class(book_me_path, "nav__link--active")

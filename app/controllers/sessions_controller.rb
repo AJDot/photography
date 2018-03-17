@@ -19,7 +19,6 @@ class SessionsController < ApplicationController
     @user = User.first
     @session = Session.new(session_params)
     @session.creator = @user
-    binding.pry
     if @session.save
       flash[:success] = 'You have created a session.'
       redirect_to session_path(@session)

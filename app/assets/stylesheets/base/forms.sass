@@ -6,8 +6,9 @@
     margin-bottom: 20px
     box-sizing: border-box
 
-    &--6of12
-      width: 50%
+    @for $i from 1 through 12
+      &--#{$i}of12
+        width: percentage($i / 12)
 
     &--right
       float: right
@@ -23,19 +24,23 @@
     font: inherit
     line-height: 1.4
     background: inherit
-    border: 1px solid #cccccc
+    border: 1px solid $gray
     border-radius: $border-radius
     outline: none
     box-sizing: border-box
     transition: border-color $t-speed $t-func, background $t-speed $t-func
 
     &:hover, &:focus
-      border-color: $dark-green
-      background: $gray
+      border-color: $black
+      background: $gray--light
 
     &--vert-resizeable
       min-height: 200px
       resize: vertical
+
+    &:hover option
+      color: $gray--light
+      background: $black
 
 .form-addon-group
   display: table
@@ -44,8 +49,8 @@
     display: table-cell
     width: 1%
     padding: 0 10px
-    background: #cccccc
-    border: 1px solid #cccccc
+    background: $gray
+    border: 1px solid $gray
     border-right: none
     box-sizing: border-box
     transition: border-color $t-speed $t-func, background $t-speed $t-func

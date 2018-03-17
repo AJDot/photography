@@ -16,4 +16,7 @@ Rails.application.routes.draw do
     resources :images, only: [:create, :destroy], controller: 'session_images'
   end
   resources :prints, only: [:index]
+  get 'about', to: 'pages#about', as: 'about'
+  get 'book_me', to: 'book_me#new', as: 'book_mes'
+  post 'book_me', to: 'book_me#create'
 end

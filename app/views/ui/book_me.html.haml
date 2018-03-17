@@ -1,0 +1,44 @@
+%section.book-me
+  %h2.book-me__title Book Me
+  %p.book-me__explain
+    Want to know more? Have a special request? Send me a message.
+
+  %form
+    %fieldset
+      %dl.form__group.form__group--4of12
+        %dt.form__item
+          %label.form__label Name
+        %dd.form__item
+          %input.form__field(type="text" placeholder="Amazing Person")
+      %dl.form__group.form__group--4of12
+        %dt.form__item
+          %label.form__label Phone
+        %dd.form__item
+          %input.form__field(type="tel" placeholder="(###) ### - ####")
+      %dl.form__group.form__group--4of12
+        %dt.form__item
+          %label.form__label Email
+        %dd.form__item
+          %input.form__field(type="email" placeholder="amazing_person@example.com")
+      %dl.form__group.form__group--6of12
+        %dt.form__item
+          %label.form__label Event Date
+        %dd.form__item
+          %input.form__field(type="date")
+      %dl.form__group.form__group--6of12
+        %dt.form__item
+          %label.form__label Event Type
+        %dd.form__item
+          %select.form__field
+            %option Select a Type
+            %option Family
+            %option Engagement
+            %option Newborn
+            %option Portrait
+      %dl.form__group
+        %dt.form__item
+          %label.form__label Your Message
+        %dd.form__item
+          %textarea.form__field.form__field--vert-resizeable(placeholder="What would you like to know?")
+    .form__group
+      %input.btn.btn--wide(type="submit" value="Send")
