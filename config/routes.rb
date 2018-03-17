@@ -19,4 +19,5 @@ Rails.application.routes.draw do
   get 'about', to: 'pages#about', as: 'about'
   get 'book_me', to: 'book_me#new', as: 'book_mes'
   post 'book_me', to: 'book_me#create'
+  post 'contact_me', to: 'contact_me#create', as: 'contact_mes'
 end

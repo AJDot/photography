@@ -1,17 +1,10 @@
 require 'rails_helper'
 
-describe BookMeController do
-  describe 'GET new' do
-    it 'sets @book_me to a book_me' do
-      get :new
-      expect(assigns(:book_me)).to be_instance_of BookMe
-    end
-  end
-
+describe ContactMeController do
   describe 'POST create' do
     context 'with valid inputs' do
       before do
-        post :create, params: { book_me: { name: 'alice', phone: '1234567890', email: 'alice@example.com', event_date: '2018-12-31', event_type: 'Family', message: 'Tell me something.' } }
+        post :create, params: { contact_me: { name: 'alice', email: 'alice@example.com', message: 'Tell me something.' } }
       end
 
       after do
@@ -34,22 +27,22 @@ describe BookMeController do
         expect(flash[:success]).to be_present
       end
 
-      it 'redirects to the book_me path' do
-        expect(response).to redirect_to book_me_path
+      it 'redirects to the about path' do
+        expect(response).to redirect_to about_path
       end
     end
 
     context 'with invalid inputs' do
       before do
-        post :create, params: { book_me: { name: 'alice', phone: '1234567890', email: 'alice@example.com', event_date: '2018-12-31', event_type: 'Family', message: '' } }
+        post :create, params: { contact_me: { name: 'alice', email: 'alice@example.com', message: '' } }
       end
 
       it 'sets the flash danger message' do
         expect(flash[:danger]).to be_present
       end
 
-      it 'redirects to the book_me path' do
-        expect(response).to redirect_to book_me_path
+      it 'redirects to the about path' do
+        expect(response).to redirect_to about_path
       end
     end
   end

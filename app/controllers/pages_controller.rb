@@ -11,4 +11,9 @@ class PagesController < ApplicationController
   def index
     redirect_to root_path if Rails.env.production?
   end
+
+  def about
+    @user = User.first
+    @contact_me = ContactMe.new
+  end
 end

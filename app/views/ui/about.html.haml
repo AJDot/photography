@@ -1,0 +1,36 @@
+%section.about
+  %h2.about__title About Me
+  .row.about__content.clearfix
+    .col.col--6of12
+      %img.about__img(src="http://placehold.it/600x600")
+    .col.col--6of12
+      .about__summary
+        %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quis lacinia dui, ac ullamcorper enim. Nullam ut augue vel nunc congue rhoncus quis a metus. In hac habitasse platea dictumst. In tempus mattis nisl, sit amet eleifend lectus eleifend eu. Sed sodales ligula quis ipsum maximus fringilla. Pellentesque consectetur augue id mi auctor aliquam. Nulla eget arcu varius, cursus tellus eu, interdum sem. Phasellus rhoncus ante nec fermentum tempor. Phasellus vitae pellentesque nisi. Mauris placerat nibh et arcu tempor varius. Duis feugiat, massa non rutrum mattis, urna lacus vehicula turpis, at finibus turpis nulla at diam. Ut laoreet, nisi vel suscipit pretium, sem metus tincidunt tellus, at lobortis felis ipsum non dui. Proin nec sapien scelerisque, dignissim eros vitae, eleifend arcu. Duis at sagittis nibh, sit amet venenatis ex. Mauris vulputate hendrerit leo, vitae pharetra orci vulputate a.
+
+        %p Maecenas est purus, ornare eget nunc porta, fringilla efficitur libero. Integer sit amet efficitur metus, quis euismod tortor. Nunc congue orci purus, sed pellentesque odio lacinia nec. Nam diam nulla, pharetra vel libero non, pellentesque malesuada lectus. Aliquam quis pretium velit, vel porta purus. Aenean mattis urna lorem, in bibendum felis feugiat vel. Mauris luctus vitae dui id facilisis. Aenean ut orci orci. Integer in turpis id dui tristique consectetur. Mauris tellus sapien, eleifend sed bibendum nec, placerat sit amet dui. Donec faucibus sodales eros. Phasellus ut erat nulla. Curabitur commodo ante in elit sodales, eget volutpat libero egestas. Praesent suscipit est vel pellentesque rhoncus.
+
+        %p Praesent a suscipit quam. Curabitur et volutpat lectus, sed convallis nisl. Quisque egestas risus tincidunt venenatis malesuada. Nunc rutrum purus a nulla aliquam commodo. Aenean convallis diam eget nulla sodales imperdiet. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nisl tortor, ornare et pretium quis, imperdiet ac purus. Donec tempor nisl nec lectus vehicula, vitae posuere nulla rutrum. Aenean at ornare velit. Cras commodo semper sem, et aliquet turpis vehicula eu. Duis scelerisque efficitur semper. Ut et neque vel magna varius efficitur. Suspendisse potenti. Integer iaculis velit ornare, finibus neque sed, cursus lorem.
+
+  %hr.about__hr
+
+  %p.about__form__explain Want to find out more? Interested in prints, booking a session? Or maybe you spotted a typo on my website? Send me message.
+
+  %form.about__form
+    %fieldset
+      %dl.form__group.form__group--6of12
+        %dt.form__item
+          %label.form__label Name
+        %dd.form__item
+          %input.form__field(type="text" placeholder="Amazing Person")
+      %dl.form__group.form__group--6of12
+        %dt.form__item
+          %label.form__label Email
+        %dd.form__item
+          %input.form__field(type="email" placeholder="amazing_person@example.com")
+      %dl.form__group
+        %dt.form__item
+          %label.form__label Your Message
+        %dd.form__item
+          %textarea.form__field.form__field--vert-resizeable(placeholder="What do you have to say?")
+    .form__group
+      %input.btn.btn--wide(type="submit" value="Send")
