@@ -1,0 +1,37 @@
+.foot__content
+  %h2.foot__title Tracy's Photo Studio
+  %nav.foot__nav
+    %ul
+      - base_classes = "foot__nav-link btn-min btn-min--light "
+      %li.foot__nav-list-item
+        = link_to 'Home', home_path, class: base_classes + active_class(home_path, "foot__nav-link--active")
+      %li.foot__nav-list-item
+        = link_to 'Portfolio', sessions_path, class: base_classes + active_class(sessions_path, "foot__nav-link--active")
+      %li.foot__nav-list-item
+        = link_to 'Pricing', "#", class: base_classes + active_class("#", "foot__nav-link--active")
+      %li.foot__nav-list-item
+        = link_to 'Prints', prints_path, class: base_classes + active_class(prints_path, "foot__nav-link--active")
+      %li.foot__nav-list-item
+        = link_to 'About', about_path, class: base_classes + active_class(about_path, "foot__nav-link--active")
+      %li.foot__nav-list-item
+        = link_to 'Book Me', book_me_path, class: base_classes + active_class(book_me_path, "foot__nav-link--active")
+  %ul.foot__social
+    %li.foot__social__item
+      %a.foot__social__link.btn-icon(href="#")
+        %i.fab.fa-instagram
+    %li.foot__social__item
+      %a.foot__social__link.btn-icon(href="#")
+        %i.fab.fa-facebook
+    %li.foot__social__item
+      %a.foot__social__link.btn-icon(href="#")
+        %i.fab.fa-flickr
+    %li.foot__social__item
+      %a.foot__social__link.btn-icon(href="#")
+        %i.fab.fa-twitter
+    %li.foot__social__item
+      %a.foot__social__link.btn-icon(href="#")
+        %i.fas.fa-envelope
+  %p.copyright
+    %small Copyright © 2017 Tracy's Photo Studio
+  %p.design-by
+    %small Design by One Guy

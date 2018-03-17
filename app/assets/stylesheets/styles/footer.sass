@@ -1,0 +1,30 @@
+.foot
+  padding: 40px
+  text-align: center
+  color: $gray--light
+  background: $dark-green
+  &__content
+    width: 1000px
+    margin: 0 auto
+  &__nav-list-item
+    display: inline-block
+    margin: 0 0 15px 0
+    font-family: 'Open Sans Condensed'
+    font-size: 1.5rem
+    & + &::before
+      content: "/"
+  &__nav-link
+    margin: 0 .5em
+    color: $gray--light
+    &--active
+      border-bottom: 1px solid $gray
+  &__social
+    margin: 0 15px
+    &__item
+      display: inline-block
+      margin: 0 30px
+    &__link
+      font-size: 48px
+      color: $gray--light
+      &:hover
+        color: $black--light

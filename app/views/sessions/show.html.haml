@@ -1,7 +1,7 @@
 = content_for :head do
   = javascript_include_tag "slideshow", "data-turbolinks-track" => "reload"
 
-%section.session
+%section.session.clearfix
   %h2.session__title= @session.title
 
   = form_for @session, url: session_images_path(@session), html: { multipart: true, class: 'clearfix' }, method: 'POST' do |f|

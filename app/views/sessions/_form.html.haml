@@ -4,7 +4,7 @@
       %dt.form__item
         = f.label :title, 'Title', class: 'form__label'
       %dd.form__item
-        = f.text_field :title, class: 'form__field'
+        = f.text_field :title, class: 'form__field', placeholder: "Kent Family, Someone's Wedding, ..."
     %dl.form__group.form__group--6of12
       %dt.form__item
         = f.label :date, 'Date', class: 'form__label'
@@ -14,7 +14,7 @@
       %dt.form__item
         = f.label :gist, 'Gist', class: 'form__label'
       %dd.form__item
-        = f.text_field :gist, class: 'form__field'
+        = f.text_field :gist, class: 'form__field', placeholder: "A 1-2 sentence description."
     %dl.form__group.form__group--6of12
       %dt.form__item
         = f.label :kind_id, 'Kind', class: 'form__label'
@@ -24,7 +24,7 @@
       %dt.form__item
         = f.label :description, 'Description', class: 'form__label'
       %dd.form__item
-        = f.text_area :description, class: 'form__field form__field--vert-resizeable'
+        = f.text_area :description, class: 'form__field form__field--vert-resizeable', placeholder: "This is a longer description that could be used to provide extra details for people who may be looking for such things."
     %dl.form__group.form__group--6of12
       %dt.form__item
         = f.label :cover, 'Cover', class: 'form__label'

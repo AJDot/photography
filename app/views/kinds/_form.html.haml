@@ -4,17 +4,17 @@
       %dt.form__item
         = f.label :name, 'Name', class: 'form__label'
       %dd.form__item
-        = f.text_field :name, class: 'form__field'
+        = f.text_field :name, class: 'form__field', placeholder: "Amazing Person"
     %dl.form__group.form__group--6of12
       %dt.form__item
         = f.label :gist, 'Gist', class: 'form__label'
       %dd.form__item
-        = f.text_field :gist, class: 'form__field'
+        = f.text_field :gist, class: 'form__field', placeholder: "A 1-2 sentence description."
     %dl.form__group
       %dt.form__item
         = f.label :description, 'Description', class: 'form__label'
       %dd.form__item
-        = f.text_area :description, class: 'form__field form__field--vert-resizeable'
+        = f.text_area :description, class: 'form__field form__field--vert-resizeable', placeholder: "This is a longer description that could be used to provide extra details for people who may be looking for such things."
     %dl.form__group.form__group--6of12
       %dt.form__item
         = f.label :banner, 'Banner', class: 'form__label'
@@ -36,6 +36,6 @@
       %dt.form__item
         = f.label :price_description, 'Price Description', class: 'form__label'
       %dd.form__item
-        = f.text_area :price_description, class: 'form__field form__field--vert-resizeable'
+        = f.text_area :price_description, class: 'form__field form__field--vert-resizeable', placeholder: "Describe what the client will receive for this price."
   .form__group
     = f.submit kind.new_record? ? 'Create Kind' : 'Update Kind', class: 'btn btn--wide'

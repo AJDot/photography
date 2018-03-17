@@ -1,11 +1,11 @@
-%section.admin_edit_user
+%section.admin_edit_user.clearfix
   %form
     %fieldset
       %dl.form__group.form__group--6of12
         %dt.form__item
           %label.form__label Title
         %dd.form__item
-          %input.form__field(type="text" value="Kent Family")
+          %input.form__field(type="text" placeholder="Kent Family, Someone's Wedding, ...")
       %dl.form__group.form__group--6of12
         %dt.form__item
           %label.form__label Date
@@ -15,7 +15,7 @@
         %dt.form__item
           %label.form__label Gist
         %dd.form__item
-          %input.form__field(type="text")
+          %input.form__field(type="text" placeholder="A 1-2 sentence description.")
       %dl.form__group.form__group--6of12
         %dt.form__item
           %label.form__label Kind
@@ -29,7 +29,7 @@
         %dt.form__item
           %label.form__label Description
         %dd.form__item
-          %textarea.form__field
+          %textarea.form__field.form__field--vert-resizeable(placeholder="This is a longer description that could be used to provide extra details for people who may be looking for such things.")
       %dl.form__group.form__group--6of12
         %dt.form__item
           %label.form__label Cover

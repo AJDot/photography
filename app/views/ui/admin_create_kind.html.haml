@@ -1,22 +1,21 @@
-%section.admin_create_kind
+%section.admin_create_kind.clearfix
   %form
     %fieldset
       %dl.form__group.form__group--6of12
         %dt.form__item
           %label.form__label Name
         %dd.form__item
-          %input.form__field(type="text" value="Portrait")
+          %input.form__field(type="text" placeholder="Amazing Person")
       %dl.form__group.form__group--6of12
         %dt.form__item
           %label.form__label Gist
         %dd.form__item
-          %input.form__field(type="text" value="A relaxed photoshoot where you can be yourself.")
+          %input.form__field(type="text" placeholder="A 1-2 sentence description.")
       %dl.form__group
         %dt.form__item
           %label.form__label Description
         %dd.form__item
-          %textarea.form__field.form__field--vert-resizeable
-            This is a longer description that could be used to provide extra details for people who may be looking for such things.
+          %textarea.form__field.form__field--vert-resizeable(placeholder="This is a longer description that could be used to provide extra details for people who may be looking for such things.")
       %dl.form__group.form__group--6of12
         %dt.form__item
           %label.form__label Banner
@@ -38,7 +37,6 @@
         %dt.form__item
           %label.form__label Price Description
         %dd.form__item
-          %textarea.form__field.form__field--vert-resizeable
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tincidunt turpis purus, nec euismod mauris convallis non. Quisque facilisis nibh ac ligula blandit, non finibus ipsum pretium. Aliquam erat volutpat. Aenean eget iaculis sem. Phasellus et pellentesque elit, sit amet sagittis mauris. Morbi suscipit scelerisque neque. Donec urna nunc, consectetur vitae aliquam semper, ultrices ut sem. Integer suscipit neque dictum, euismod nisl eu, auctor magna. Proin elementum semper dolor, a lobortis sem feugiat ut. Nulla eget tincidunt orci. Etiam eu pretium risus. Suspendisse sollicitudin odio ac magna pretium, at vestibulum urna viverra. Integer ullamcorper tristique diam, sit amet convallis sem volutpat ac. Mauris gravida arcu vitae sem placerat, in dignissim orci accumsan. Cras id quam vitae justo varius aliquet.
+          %textarea.form__field.form__field--vert-resizeable(placeholder="Describe what the client will receive for this price.")
     .form__group
-      %input.btn.btn--primary(type="submit" value="Create")
+      %input.btn.btn--wide(type="submit" value="Create")

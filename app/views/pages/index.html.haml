@@ -1,51 +1,48 @@
-%h2 To Do
-%ul
-  %li
-    %a(href="#") Full Home Page
-  %li
-    %a(href="#") Pricing
-  %li
-    %a(href="#") Book Me
-  %li
-    %a(href="#") Prints
-  %li
-    %a(href="#") About
-  %li
-    %p Footer
-  %li
-    %p Restrict resource CrUD to admin
+%section.pages_index.clearfix
+  %h2 To Do
+  %ul
+    %li
+      %a(href="#") Full Home Page
+    %li
+      %a(href="#") Pricing
+    %li
+      %p Footer
+    %li
+      %p Restrict resource CrUD to admin
+    %li
+      %p Flash messages
 
-%hr
+  %hr
 
-%h2 Working Links
-%ul
-  %li
-    = link_to 'Home', home_path
-  %li
-    = link_to 'Admin Edit Profile', edit_user_path(User.first)
-  %li
-    = link_to 'Admin Create New Kind', new_kind_path
-  %li
-    = link_to 'View All Kinds', kinds_path
-  %li
-    = link_to 'Admin Edit Kind', edit_kind_path(Kind.first)
-  %li
-    = link_to 'Admin Delete Kind', kinds_path
-  %li
-    = link_to 'Admin Create New Session', new_session_path
-  %li
-    = link_to 'View All Sessions', sessions_path
-  %li
-    = link_to 'View Session', session_path(Session.first)
-  %li
-    = link_to 'Admin Edit Session', edit_session_path(Session.first)
-  %li
-    = link_to 'Admin Delete Session', session_path(Session.first)
-  %li
-    = link_to 'Add Images to Session', session_path(Session.first)
-  %li
-    = link_to 'Delete Image from Session', session_path(Session.first)
-  %li
-    = link_to 'About page with Contact Me form', about_path
-  %li
-    = link_to 'Book Me page with form', book_me_path
+  %h2 Working Links
+  %ul
+    %li
+      = link_to 'Home', home_path
+    %li
+      = link_to 'Admin Edit Profile', edit_user_path(User.first)
+    %li
+      = link_to 'Admin Create New Kind', new_kind_path
+    %li
+      = link_to 'View All Kinds', kinds_path
+    %li
+      = link_to 'Admin Edit Kind', edit_kind_path(Kind.first)
+    %li
+      = link_to 'Admin Delete Kind', kinds_path
+    %li
+      = link_to 'Admin Create New Session', new_session_path
+    %li
+      = link_to 'View All Sessions', sessions_path
+    %li
+      = link_to 'View Session', session_path(Session.first)
+    %li
+      = link_to 'Admin Edit Session', edit_session_path(Session.first)
+    %li
+      = link_to 'Admin Delete Session', session_path(Session.first)
+    %li
+      = link_to 'Add Images to Session', session_path(Session.first)
+    %li
+      = link_to 'Delete Image from Session', session_path(Session.first)
+    %li
+      = link_to 'About page with Contact Me form', about_path
+    %li
+      = link_to 'Book Me page with form', book_me_path

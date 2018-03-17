@@ -1,6 +1,6 @@
 = link_to "Create New Kind", new_kind_path, class: 'btn'
 
-%section.kinds
+%section.kinds.clearfix
   - if @kinds.empty?
     %p There are no kinds! Add a kind using the link on this page.
   - else
