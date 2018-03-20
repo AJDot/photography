@@ -1,0 +1,28 @@
+.alert
+  position: relative
+  padding: 20px
+  margin: 10px
+  font-weight: bold
+  background: $gray
+  border-radius: $border-radius
+  &--success
+    color: $green--dark
+    background: $green--light
+  &--warning
+    color: $orange--dark
+    background: $orange--light
+  &--danger
+    color: $red--dark
+    background: $red--light
+
+.close
+  position: absolute
+  display: inline
+  top: 50%
+  right: 0
+  padding: 0 20px 0 0
+  font-size: 2em
+  font-weight: bold
+  color: $black
+  cursor: pointer
+  transform: translateY(-50%)

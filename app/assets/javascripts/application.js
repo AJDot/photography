@@ -12,4 +12,5 @@
 //
 //= require jquery
 //= require rails-ujs
+//= require flash_messages
 //= require turbolinks

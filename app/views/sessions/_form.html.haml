@@ -19,7 +19,7 @@
       %dt.form__item
         = f.label :kind_id, 'Kind', class: 'form__label'
       %dd.form__item
-        = f.select :kind_id, options_for_select(Kind.all.collect { |k| [k.name, k.id] }), {}, class: 'form__field'
+        = f.select :kind_id, options_for_select(Kind.all.collect { |k| [k.name, k.id] }, sess[:kind_id]), {}, class: 'form__field'
     %dl.form__group.form__group--6of12
       %dt.form__item
         = f.label :description, 'Description', class: 'form__label'

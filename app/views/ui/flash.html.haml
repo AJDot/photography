@@ -1,0 +1,8 @@
+- flash[:success] = "A successful message."
+- flash[:warning] = "A warning message."
+- flash[:danger] = "A danger message."
+
+- flash.each do |name, message|
+  %div(class="alert alert--#{name}")
+    %a.close(data-dismiss='alert') &#215;
+    = content_tag :div, message, id: "flash_#{name}" if message.is_a?(String)
