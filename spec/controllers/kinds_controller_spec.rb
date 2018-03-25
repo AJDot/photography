@@ -14,6 +14,10 @@ describe KindsController do
       let(:action) { get :new }
     end
 
+    before do
+      set_current_user
+    end
+
     it 'sets @kind to a new kind' do
       get :new
       expect(assigns(:kind)).to be_a_new Kind
@@ -21,11 +25,17 @@ describe KindsController do
   end
 
   describe 'POST create' do
+    it_behaves_like 'requires admin' do
+      let(:action) do
+        post :create, params: { kind: Fabricate.attributes_for(:kind) }
+      end
+    end
+
     context 'with valid inputs' do
-      let(:current_user) { Fabricate(:user) }
+      let(:alice) { Fabricate(:user) }
 
       before do
-        event[:user_id] = current_user.id
+        set_current_user(alice)
         post :create, params: { kind: Fabricate.attributes_for(:kind) }
       end
 
@@ -43,10 +53,10 @@ describe KindsController do
     end
 
     context 'with invalid inputs' do
-      let(:current_user) { Fabricate(:user) }
+      let(:alice) { Fabricate(:user) }
 
       before do
-        event[:user_id] = current_user.id
+        set_current_user(alice)
         post :create, params: { kind: Fabricate.attributes_for(:kind, name: '') }
       end
 
@@ -65,8 +75,17 @@ describe KindsController do
   end
 
   describe 'GET edit' do
+    let(:kind) { Fabricate(:kind) }
+
+    it_behaves_like 'requires admin' do
+      let(:action) { get :edit, params: { id: kind.id } }
+    end
+
+    before do
+      set_current_user
+    end
+
     it 'sets @kind to selected kind' do
-      kind = Fabricate(:kind)
       get :edit, params: { id: kind.id }
       expect(assigns(:kind)).to eq(kind)
     end
@@ -77,6 +96,16 @@ describe KindsController do
   end
 
   describe 'PATCH update' do
+    it_behaves_like 'requires admin' do
+      kind = Fabricate(:kind, name: 'old name')
+      attrs = kind.attributes.merge("name" => 'new name')
+      let(:action) { patch :update, params: { kind: attrs, id: kind.id } }
+    end
+
+    before do
+      set_current_user
+    end
+
     context 'with valid inputs' do
       let(:kind) { Fabricate(:kind, name: 'old name') }
 
@@ -129,11 +158,15 @@ describe KindsController do
   end
 
   describe 'DELETE destroy' do
-    context 'with an existing kind' do
-      let(:alice) { Fabricate(:user) }
-      let(:kind) { Fabricate(:kind) }
-      let(:sess) { Fabricate(:event, title: 'old title', creator: alice, kind: kind) }
+    let(:alice) { Fabricate(:user) }
+    let(:kind) { Fabricate(:kind) }
+    let(:sess) { Fabricate(:event, title: 'old title', creator: alice, kind: kind) }
 
+    before do
+      set_current_user(alice)
+    end
+
+    context 'with an existing kind' do
       before do
         delete :destroy, params: { id: kind.id }
       end

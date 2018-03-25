@@ -28,6 +28,7 @@ end
 
 shared_examples 'requires admin' do
   it 'redirects to home page' do
+    clear_current_user
     action
     expect(response).to redirect_to home_path
   end

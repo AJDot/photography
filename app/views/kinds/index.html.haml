@@ -1,4 +1,5 @@
-= link_to "Create New Kind", new_kind_path, class: 'btn'
+- if logged_in?
+  = link_to "Create New Kind", new_kind_path, class: 'btn'
 
 %section.kinds.clearfix
   - if @kinds.empty?
@@ -14,4 +15,5 @@
               %h2.kind__name= kind.name
               %p.kind__desc= kind.description
 
-        = link_to "Delete", kind_path(kind), method: :delete, class: 'btn-delete btn-delete--bottom-right', data: { confirm: "Are you sure you want to delete the kind \"#{kind.name}\"? NOTE: All events associated with this kind will also be removed." }
+        - if logged_in?
+          = link_to "Delete", kind_path(kind), method: :delete, class: 'btn-delete btn-delete--bottom-right', data: { confirm: "Are you sure you want to delete the kind \"#{kind.name}\"? NOTE: All events associated with this kind will also be removed." }
