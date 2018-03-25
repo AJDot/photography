@@ -10,6 +10,10 @@ describe KindsController do
   end
 
   describe 'GET new' do
+    it_behaves_like 'requires admin' do
+      let(:action) { get :new }
+    end
+
     it 'sets @kind to a new kind' do
       get :new
       expect(assigns(:kind)).to be_a_new Kind
@@ -21,7 +25,7 @@ describe KindsController do
       let(:current_user) { Fabricate(:user) }
 
       before do
-        session[:user_id] = current_user.id
+        event[:user_id] = current_user.id
         post :create, params: { kind: Fabricate.attributes_for(:kind) }
       end
 
@@ -42,7 +46,7 @@ describe KindsController do
       let(:current_user) { Fabricate(:user) }
 
       before do
-        session[:user_id] = current_user.id
+        event[:user_id] = current_user.id
         post :create, params: { kind: Fabricate.attributes_for(:kind, name: '') }
       end
 
@@ -128,7 +132,7 @@ describe KindsController do
     context 'with an existing kind' do
       let(:alice) { Fabricate(:user) }
       let(:kind) { Fabricate(:kind) }
-      let(:sess) { Fabricate(:session, title: 'old title', creator: alice, kind: kind) }
+      let(:sess) { Fabricate(:event, title: 'old title', creator: alice, kind: kind) }
 
       before do
         delete :destroy, params: { id: kind.id }
@@ -138,8 +142,8 @@ describe KindsController do
         expect(Kind.count).to eq(0)
       end
 
-      it 'deletes associated sessions' do
-        expect(Session.count).to eq(0)
+      it 'deletes associated events' do
+        expect(Event.count).to eq(0)
       end
 
       it 'redirects to the kinds index page' do

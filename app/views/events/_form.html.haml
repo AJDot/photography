@@ -1,4 +1,4 @@
-= form_for sess, html: { multiplepart: true } do |f|
+= form_for event, html: { multiplepart: true } do |f|
   %fieldset
     %dl.form__group.form__group--6of12
       %dt.form__item
@@ -19,7 +19,7 @@
       %dt.form__item
         = f.label :kind_id, 'Kind', class: 'form__label'
       %dd.form__item
-        = f.select :kind_id, options_for_select(Kind.all.collect { |k| [k.name, k.id] }, sess[:kind_id]), {}, class: 'form__field'
+        = f.select :kind_id, options_for_select(Kind.all.collect { |k| [k.name, k.id] }, event[:kind_id]), {}, class: 'form__field'
     %dl.form__group.form__group--6of12
       %dt.form__item
         = f.label :description, 'Description', class: 'form__label'
@@ -32,8 +32,8 @@
         = f.file_field :cover, class: 'form__field'
     %dl.form__group.form__group--6of12
       %dt.form__item
-        = f.label :images, 'Images', class: 'form__label'
+        = f.label :event_images, 'Images', class: 'form__label'
       %dd.form__item
-        = f.file_field :images, class: 'form__field', multiple: true
+        = f.file_field :event_images, class: 'form__field', multiple: true
   .form__group
-    = f.submit sess.new_record? ? 'Create Session' : 'Update Session', class: 'btn btn--wide'
+    = f.submit event.new_record? ? 'Create Event' : 'Update Event', class: 'btn btn--wide'

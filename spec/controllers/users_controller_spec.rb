@@ -10,7 +10,7 @@ describe UsersController do
       let(:current_user) { Fabricate(:user, name: 'old name') }
 
       before do
-        session[:user_id] = current_user.id
+        event[:user_id] = current_user.id
         altered_params = current_user.attributes.merge({'name' => 'new name'})
         patch :update, params: { user: altered_params, id: current_user.id }
       end
@@ -32,7 +32,7 @@ describe UsersController do
       let(:current_user) { Fabricate(:user, name: 'old name') }
 
       before do
-        session[:user_id] = current_user.id
+        event[:user_id] = current_user.id
         altered_params = current_user.attributes.merge({'name' => ''})
         patch :update, params: { user: altered_params, id: current_user.id }
       end

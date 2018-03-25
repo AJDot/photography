@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :sessions
+  has_many :events
   mount_uploader :portrait, UserPortraitUploader
 
   has_secure_password

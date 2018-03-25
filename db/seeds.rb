@@ -34,5 +34,5 @@ family = Fabricate(
 # )
 
 20.times do
-  Fabricate(:session, cover: Pathname.new(tmp_images.sample).open, creator: alice, kind: Kind.all.sample)
+  Fabricate(:event, cover: Pathname.new(tmp_images.sample).open, creator: alice, kind: Kind.all.sample)
 end

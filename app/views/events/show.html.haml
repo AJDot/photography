@@ -1,0 +1,39 @@
+= content_for :head do
+  = javascript_include_tag "slideshow", "data-turbolinks-track" => "reload"
+
+%section.event.clearfix
+  %h2.event__title= @event.title
+
+  = form_for @event, url: event_images_path(@event), html: { multipart: true, class: 'clearfix' }, method: 'POST' do |f|
+    %fieldset
+      %dl.form__group.form__group--6of12
+        %dt.form__item
+          = f.label :event_images, 'Images', class: 'form__label'
+        %dd.form__item
+          = f.file_field :event_images, class: 'form__field', multiple: true
+    .form__group.form__group--6of12
+      = f.submit 'Add Images', class: 'btn btn--wide'
+
+  - if @event.images.empty?
+    %p This event is empty! Add images using the form on this page.
+  - else
+    #slideshow.slideshow
+      .slideshow__slides
+        - @event.images.each_with_index do |image, index|
+          %figure.slideshow__figure(data-id="#{index}")
+            %img(src="#{image}" alt="PHOTO")
+            = link_to "Delete Image", event_image_path(@event, index), method: :delete, class: 'btn-delete btn-delete--top-right', data: { confirm: "Are you sure you want to delete this image?" }
+      %ul#thumbnails.thumbnails.thumbnails--dynamic(data-dynamic="true")
+        - @event.images.each_with_index do |image, index|
+          %li.thumbnails__item.thumbnails--dynamic__item(data-id="#{index}")
+            %a(href="#")
+              %img(src="#{image.thumb}" alt="THUMBNAIL")
+      %ul
+        %li
+          %a.prev(href="#")
+            %i.material-icons navigate_before
+        %li
+          %a.next(href="#")
+            %i.material-icons navigate_next
+
+= link_to "Delete Event", event_path(@event), method: :delete, class: 'btn-delete', data: { confirm: "Are you sure you want to delete the event \"#{@event.title}\"?" }

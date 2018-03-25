@@ -8,12 +8,14 @@ Rails.application.routes.draw do
       get "ui/#{wireframe}", to: "ui##{wireframe}"
     end
   end
+
   get 'home', to: 'pages#home', as: 'home'
   get 'sitemap', to: 'pages#index', as: 'sitemap'
   resources :users, only: [:edit, :update]
+  get 'login', to: 'sessions#new', as: 'login'
   resources :kinds, only: [:index, :new, :create, :edit, :update, :destroy]
-  resources :sessions do
-    resources :images, only: [:create, :destroy], controller: 'session_images'
+  resources :events do
+    resources :event_images, only: [:create, :destroy], controller: 'event_images'
   end
   resources :prints, only: [:index]
   get 'about', to: 'pages#about', as: 'about'

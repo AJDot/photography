@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180313003955) do
+ActiveRecord::Schema.define(version: 20180325195433) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "events", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "kind_id"
+    t.string "title"
+    t.date "date"
+    t.text "gist"
+    t.text "description"
+    t.json "images"
+    t.string "cover"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "kinds", force: :cascade do |t|
     t.string "name"
@@ -22,19 +35,6 @@ ActiveRecord::Schema.define(version: 20180313003955) do
     t.integer "price"
     t.text "price_description"
     t.string "banner"
-    t.string "cover"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "sessions", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "kind_id"
-    t.string "title"
-    t.date "date"
-    t.text "gist"
-    t.text "description"
-    t.json "images"
     t.string "cover"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

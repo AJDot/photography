@@ -1,26 +1,26 @@
 = content_for :head do
   :javascript
     $(document).on("turbolinks:load", function() {
-      var SessionFilterer = {
+      var EventFilterer = {
         Filter: {
           bindEvents: function() {
-            $('.sessions-filter__button, .sessions-filter__link').on('click', function(event) {
-              $('.sessions-filter__list').toggleClass('sessions-filter__list--opened');
+            $('.events-filter__button, .events-filter__link').on('click', function(event) {
+              $('.events-filter__list').toggleClass('events-filter__list--opened');
             });
 
-            $('.sessions-filter__list').on('click', 'a', function(event) {
+            $('.events-filter__list').on('click', 'a', function(event) {
               $a = $(this);
-              $li = $a.closest('.sessions-filter__item');
-              $('.sessions-filter__item').removeClass('active');
+              $li = $a.closest('.events-filter__item');
+              $('.events-filter__item').removeClass('active');
               $li.addClass('active');
             });
           }
         },
 
-        filterSessions: function(event) {
+        filterEvents: function(event) {
           event.preventDefault();
           var kind = $(event.currentTarget).data("kind");
-          var $cards = $(".session-card");
+          var $cards = $(".event-card");
           var kindFilter = '[data-kind="' + kind + '"]';
           var $picked = $cards.filter(kindFilter);
           var $notPicked = $cards.not(kindFilter);
@@ -31,263 +31,263 @@
         },
 
         updateButton: function(kind) {
-          var $button = $('.sessions-filter__button')
+          var $button = $('.events-filter__button')
           $button.text(kind);
         },
 
         bindEvents: function() {
           this.Filter.bindEvents();
-          $('.sessions-filter__link').on('click', this.filterSessions.bind(this));
+          $('.events-filter__link').on('click', this.filterEvents.bind(this));
         }
       }
 
-      SessionFilterer.bindEvents();
+      EventFilterer.bindEvents();
     });
 
-%a.btn Create New Session
+%a.btn Create New Event
 
-%section.sessions.clearfix
-  %h2.sessions__title
-    %span Sessions
-    .sessions-filter
-      %button.sessions-filter__button Filter
-      %ul.sessions-filter__list
-        %li.sessions-filter__item.sessions-filter__item--one
-          %a.sessions-filter__link(href="#" data-kind="Family")
-            %span.sessions-filter__link--icon Family
-        %li.sessions-filter__item.sessions-filter__item--two
-          %a.sessions-filter__link(href="#" data-kind="Engagement")
-            %span.sessions-filter__link--icon Engagement
-        %li.sessions-filter__item.sessions-filter__item--three
-          %a.sessions-filter__link(href="#" data-kind="Newborn")
-            %span.sessions-filter__link--icon Newborn
-        %li.sessions-filter__item.sessions-filter__item--four
-          %a.sessions-filter__link(href="#" data-kind="Portrait")
-            %span.sessions-filter__link--icon Portait
+%section.events.clearfix
+  %h2.events__title
+    %span Events
+    .events-filter
+      %button.events-filter__button Filter
+      %ul.events-filter__list
+        %li.events-filter__item.events-filter__item--one
+          %a.events-filter__link(href="#" data-kind="Family")
+            %span.events-filter__link--icon Family
+        %li.events-filter__item.events-filter__item--two
+          %a.events-filter__link(href="#" data-kind="Engagement")
+            %span.events-filter__link--icon Engagement
+        %li.events-filter__item.events-filter__item--three
+          %a.events-filter__link(href="#" data-kind="Newborn")
+            %span.events-filter__link--icon Newborn
+        %li.events-filter__item.events-filter__item--four
+          %a.events-filter__link(href="#" data-kind="Portrait")
+            %span.events-filter__link--icon Portait
 
     %svg(height="0" width="0")
       %defs
         %clipPath(clipPathUnits="objectBoundingBox" id="sector")
           %path(fill="none" stroke="#111" stroke-width="1" class="sector" d="M0.5,0.5 l0.5,0 A0.5,0.5 0 0,0 0.5,0 z")
 
-  %ul.sessions__list
-    %li.session-card(data-kind="Family")
-      %a.session-card__link(href="#")
-        %img.session-card__img(src="/tmp/portfolio_family.jpg")
-        .session-card__overlay
-          %ul.session-card__overlay-content
-            %li.session-card__time
+  %ul.events__list
+    %li.event-card(data-kind="Family")
+      %a.event-card__link(href="#")
+        %img.event-card__img(src="/tmp/portfolio_family.jpg")
+        .event-card__overlay
+          %ul.event-card__overlay-content
+            %li.event-card__time
               %time(datetime="2017-12-31") 12.31.2017
-            %li.session-card__title
-              %h3.session-card__title--inner Awesome Family
-            %li.session-card__kind
-              %small Family Session
-    %li.session-card(data-kind="Engagement")
-      %a.session-card__link(href="#")
-        %img.session-card__img(src="/tmp/portfolio_engagement.jpg")
-        .session-card__overlay
-          %ul.session-card__overlay-content
-            %li.session-card__time
+            %li.event-card__title
+              %h3.event-card__title--inner Awesome Family
+            %li.event-card__kind
+              %small Family Event
+    %li.event-card(data-kind="Engagement")
+      %a.event-card__link(href="#")
+        %img.event-card__img(src="/tmp/portfolio_engagement.jpg")
+        .event-card__overlay
+          %ul.event-card__overlay-content
+            %li.event-card__time
               %time(datetime="2017-12-31") 12.31.2017
-            %li.session-card__title
-              %h3.session-card__title--inner Awesome Family
-            %li.session-card__kind
-              %small Family Session
-    %li.session-card(data-kind="Newborn")
-      %a.session-card__link(href="#")
-        %img.session-card__img(src="/tmp/portfolio_newborn.jpg")
-        .session-card__overlay
-          %ul.session-card__overlay-content
-            %li.session-card__time
+            %li.event-card__title
+              %h3.event-card__title--inner Awesome Family
+            %li.event-card__kind
+              %small Family Event
+    %li.event-card(data-kind="Newborn")
+      %a.event-card__link(href="#")
+        %img.event-card__img(src="/tmp/portfolio_newborn.jpg")
+        .event-card__overlay
+          %ul.event-card__overlay-content
+            %li.event-card__time
               %time(datetime="2017-12-31") 12.31.2017
-            %li.session-card__title
-              %h3.session-card__title--inner Awesome Family
-            %li.session-card__kind
-              %small Family Session
-    %li.session-card(data-kind="Portrait")
-      %a.session-card__link(href="#")
-        %img.session-card__img(src="/tmp/portfolio_portrait.jpg")
-        .session-card__overlay
-          %ul.session-card__overlay-content
-            %li.session-card__time
+            %li.event-card__title
+              %h3.event-card__title--inner Awesome Family
+            %li.event-card__kind
+              %small Family Event
+    %li.event-card(data-kind="Portrait")
+      %a.event-card__link(href="#")
+        %img.event-card__img(src="/tmp/portfolio_portrait.jpg")
+        .event-card__overlay
+          %ul.event-card__overlay-content
+            %li.event-card__time
               %time(datetime="2017-12-31") 12.31.2017
-            %li.session-card__title
-              %h3.session-card__title--inner Awesome Family
-            %li.session-card__kind
-              %small Family Session
-    %li.session-card(data-kind="Family")
-      %a.session-card__link(href="#")
-        %img.session-card__img(src="/tmp/portfolio_family.jpg")
-        .session-card__overlay
-          %ul.session-card__overlay-content
-            %li.session-card__time
+            %li.event-card__title
+              %h3.event-card__title--inner Awesome Family
+            %li.event-card__kind
+              %small Family Event
+    %li.event-card(data-kind="Family")
+      %a.event-card__link(href="#")
+        %img.event-card__img(src="/tmp/portfolio_family.jpg")
+        .event-card__overlay
+          %ul.event-card__overlay-content
+            %li.event-card__time
               %time(datetime="2017-12-31") 12.31.2017
-            %li.session-card__title
-              %h3.session-card__title--inner Awesome Family
-            %li.session-card__kind
-              %small Family Session
-    %li.session-card(data-kind="Engagement")
-      %a.session-card__link(href="#")
-        %img.session-card__img(src="/tmp/portfolio_engagement.jpg")
-        .session-card__overlay
-          %ul.session-card__overlay-content
-            %li.session-card__time
+            %li.event-card__title
+              %h3.event-card__title--inner Awesome Family
+            %li.event-card__kind
+              %small Family Event
+    %li.event-card(data-kind="Engagement")
+      %a.event-card__link(href="#")
+        %img.event-card__img(src="/tmp/portfolio_engagement.jpg")
+        .event-card__overlay
+          %ul.event-card__overlay-content
+            %li.event-card__time
               %time(datetime="2017-12-31") 12.31.2017
-            %li.session-card__title
-              %h3.session-card__title--inner Awesome Family
-            %li.session-card__kind
-              %small Family Session
-    %li.session-card(data-kind="Newborn")
-      %a.session-card__link(href="#")
-        %img.session-card__img(src="/tmp/portfolio_newborn.jpg")
-        .session-card__overlay
-          %ul.session-card__overlay-content
-            %li.session-card__time
+            %li.event-card__title
+              %h3.event-card__title--inner Awesome Family
+            %li.event-card__kind
+              %small Family Event
+    %li.event-card(data-kind="Newborn")
+      %a.event-card__link(href="#")
+        %img.event-card__img(src="/tmp/portfolio_newborn.jpg")
+        .event-card__overlay
+          %ul.event-card__overlay-content
+            %li.event-card__time
               %time(datetime="2017-12-31") 12.31.2017
-            %li.session-card__title
-              %h3.session-card__title--inner Awesome Family
-            %li.session-card__kind
-              %small Family Session
-    %li.session-card(data-kind="Portrait")
-      %a.session-card__link(href="#")
-        %img.session-card__img(src="/tmp/portfolio_portrait.jpg")
-        .session-card__overlay
-          %ul.session-card__overlay-content
-            %li.session-card__time
+            %li.event-card__title
+              %h3.event-card__title--inner Awesome Family
+            %li.event-card__kind
+              %small Family Event
+    %li.event-card(data-kind="Portrait")
+      %a.event-card__link(href="#")
+        %img.event-card__img(src="/tmp/portfolio_portrait.jpg")
+        .event-card__overlay
+          %ul.event-card__overlay-content
+            %li.event-card__time
               %time(datetime="2017-12-31") 12.31.2017
-            %li.session-card__title
-              %h3.session-card__title--inner Awesome Family
-            %li.session-card__kind
-              %small Family Session
-    %li.session-card(data-kind="Family")
-      %a.session-card__link(href="#")
-        %img.session-card__img(src="/tmp/portfolio_family.jpg")
-        .session-card__overlay
-          %ul.session-card__overlay-content
-            %li.session-card__time
+            %li.event-card__title
+              %h3.event-card__title--inner Awesome Family
+            %li.event-card__kind
+              %small Family Event
+    %li.event-card(data-kind="Family")
+      %a.event-card__link(href="#")
+        %img.event-card__img(src="/tmp/portfolio_family.jpg")
+        .event-card__overlay
+          %ul.event-card__overlay-content
+            %li.event-card__time
               %time(datetime="2017-12-31") 12.31.2017
-            %li.session-card__title
-              %h3.session-card__title--inner Awesome Family
-            %li.session-card__kind
-              %small Family Session
-    %li.session-card(data-kind="Engagement")
-      %a.session-card__link(href="#")
-        %img.session-card__img(src="/tmp/portfolio_engagement.jpg")
-        .session-card__overlay
-          %ul.session-card__overlay-content
-            %li.session-card__time
+            %li.event-card__title
+              %h3.event-card__title--inner Awesome Family
+            %li.event-card__kind
+              %small Family Event
+    %li.event-card(data-kind="Engagement")
+      %a.event-card__link(href="#")
+        %img.event-card__img(src="/tmp/portfolio_engagement.jpg")
+        .event-card__overlay
+          %ul.event-card__overlay-content
+            %li.event-card__time
               %time(datetime="2017-12-31") 12.31.2017
-            %li.session-card__title
-              %h3.session-card__title--inner Awesome Family
-            %li.session-card__kind
-              %small Family Session
-    %li.session-card(data-kind="Newborn")
-      %a.session-card__link(href="#")
-        %img.session-card__img(src="/tmp/portfolio_newborn.jpg")
-        .session-card__overlay
-          %ul.session-card__overlay-content
-            %li.session-card__time
+            %li.event-card__title
+              %h3.event-card__title--inner Awesome Family
+            %li.event-card__kind
+              %small Family Event
+    %li.event-card(data-kind="Newborn")
+      %a.event-card__link(href="#")
+        %img.event-card__img(src="/tmp/portfolio_newborn.jpg")
+        .event-card__overlay
+          %ul.event-card__overlay-content
+            %li.event-card__time
               %time(datetime="2017-12-31") 12.31.2017
-            %li.session-card__title
-              %h3.session-card__title--inner Awesome Family
-            %li.session-card__kind
-              %small Family Session
-    %li.session-card(data-kind="Portrait")
-      %a.session-card__link(href="#")
-        %img.session-card__img(src="/tmp/portfolio_portrait.jpg")
-        .session-card__overlay
-          %ul.session-card__overlay-content
-            %li.session-card__time
+            %li.event-card__title
+              %h3.event-card__title--inner Awesome Family
+            %li.event-card__kind
+              %small Family Event
+    %li.event-card(data-kind="Portrait")
+      %a.event-card__link(href="#")
+        %img.event-card__img(src="/tmp/portfolio_portrait.jpg")
+        .event-card__overlay
+          %ul.event-card__overlay-content
+            %li.event-card__time
               %time(datetime="2017-12-31") 12.31.2017
-            %li.session-card__title
-              %h3.session-card__title--inner Awesome Family
-            %li.session-card__kind
-              %small Family Session
-    %li.session-card(data-kind="Family")
-      %a.session-card__link(href="#")
-        %img.session-card__img(src="/tmp/portfolio_family.jpg")
-        .session-card__overlay
-          %ul.session-card__overlay-content
-            %li.session-card__time
+            %li.event-card__title
+              %h3.event-card__title--inner Awesome Family
+            %li.event-card__kind
+              %small Family Event
+    %li.event-card(data-kind="Family")
+      %a.event-card__link(href="#")
+        %img.event-card__img(src="/tmp/portfolio_family.jpg")
+        .event-card__overlay
+          %ul.event-card__overlay-content
+            %li.event-card__time
               %time(datetime="2017-12-31") 12.31.2017
-            %li.session-card__title
-              %h3.session-card__title--inner Awesome Family
-            %li.session-card__kind
-              %small Family Session
-    %li.session-card(data-kind="Engagement")
-      %a.session-card__link(href="#")
-        %img.session-card__img(src="/tmp/portfolio_engagement.jpg")
-        .session-card__overlay
-          %ul.session-card__overlay-content
-            %li.session-card__time
+            %li.event-card__title
+              %h3.event-card__title--inner Awesome Family
+            %li.event-card__kind
+              %small Family Event
+    %li.event-card(data-kind="Engagement")
+      %a.event-card__link(href="#")
+        %img.event-card__img(src="/tmp/portfolio_engagement.jpg")
+        .event-card__overlay
+          %ul.event-card__overlay-content
+            %li.event-card__time
               %time(datetime="2017-12-31") 12.31.2017
-            %li.session-card__title
-              %h3.session-card__title--inner Awesome Family
-            %li.session-card__kind
-              %small Family Session
-    %li.session-card(data-kind="Newborn")
-      %a.session-card__link(href="#")
-        %img.session-card__img(src="/tmp/portfolio_newborn.jpg")
-        .session-card__overlay
-          %ul.session-card__overlay-content
-            %li.session-card__time
+            %li.event-card__title
+              %h3.event-card__title--inner Awesome Family
+            %li.event-card__kind
+              %small Family Event
+    %li.event-card(data-kind="Newborn")
+      %a.event-card__link(href="#")
+        %img.event-card__img(src="/tmp/portfolio_newborn.jpg")
+        .event-card__overlay
+          %ul.event-card__overlay-content
+            %li.event-card__time
               %time(datetime="2017-12-31") 12.31.2017
-            %li.session-card__title
-              %h3.session-card__title--inner Awesome Family
-            %li.session-card__kind
-              %small Family Session
-    %li.session-card(data-kind="Portrait")
-      %a.session-card__link(href="#")
-        %img.session-card__img(src="/tmp/portfolio_portrait.jpg")
-        .session-card__overlay
-          %ul.session-card__overlay-content
-            %li.session-card__time
+            %li.event-card__title
+              %h3.event-card__title--inner Awesome Family
+            %li.event-card__kind
+              %small Family Event
+    %li.event-card(data-kind="Portrait")
+      %a.event-card__link(href="#")
+        %img.event-card__img(src="/tmp/portfolio_portrait.jpg")
+        .event-card__overlay
+          %ul.event-card__overlay-content
+            %li.event-card__time
               %time(datetime="2017-12-31") 12.31.2017
-            %li.session-card__title
-              %h3.session-card__title--inner Awesome Family
-            %li.session-card__kind
-              %small Family Session
-    %li.session-card(data-kind="Family")
-      %a.session-card__link(href="#")
-        %img.session-card__img(src="/tmp/portfolio_family.jpg")
-        .session-card__overlay
-          %ul.session-card__overlay-content
-            %li.session-card__time
+            %li.event-card__title
+              %h3.event-card__title--inner Awesome Family
+            %li.event-card__kind
+              %small Family Event
+    %li.event-card(data-kind="Family")
+      %a.event-card__link(href="#")
+        %img.event-card__img(src="/tmp/portfolio_family.jpg")
+        .event-card__overlay
+          %ul.event-card__overlay-content
+            %li.event-card__time
               %time(datetime="2017-12-31") 12.31.2017
-            %li.session-card__title
-              %h3.session-card__title--inner Awesome Family
-            %li.session-card__kind
-              %small Family Session
-    %li.session-card(data-kind="Engagement")
-      %a.session-card__link(href="#")
-        %img.session-card__img(src="/tmp/portfolio_engagement.jpg")
-        .session-card__overlay
-          %ul.session-card__overlay-content
-            %li.session-card__time
+            %li.event-card__title
+              %h3.event-card__title--inner Awesome Family
+            %li.event-card__kind
+              %small Family Event
+    %li.event-card(data-kind="Engagement")
+      %a.event-card__link(href="#")
+        %img.event-card__img(src="/tmp/portfolio_engagement.jpg")
+        .event-card__overlay
+          %ul.event-card__overlay-content
+            %li.event-card__time
               %time(datetime="2017-12-31") 12.31.2017
-            %li.session-card__title
-              %h3.session-card__title--inner Awesome Family
-            %li.session-card__kind
-              %small Family Session
-    %li.session-card(data-kind="Newborn")
-      %a.session-card__link(href="#")
-        %img.session-card__img(src="/tmp/portfolio_newborn.jpg")
-        .session-card__overlay
-          %ul.session-card__overlay-content
-            %li.session-card__time
+            %li.event-card__title
+              %h3.event-card__title--inner Awesome Family
+            %li.event-card__kind
+              %small Family Event
+    %li.event-card(data-kind="Newborn")
+      %a.event-card__link(href="#")
+        %img.event-card__img(src="/tmp/portfolio_newborn.jpg")
+        .event-card__overlay
+          %ul.event-card__overlay-content
+            %li.event-card__time
               %time(datetime="2017-12-31") 12.31.2017
-            %li.session-card__title
-              %h3.session-card__title--inner Awesome Family
-            %li.session-card__kind
-              %small Family Session
-    %li.session-card(data-kind="Portrait")
-      %a.session-card__link(href="#")
-        %img.session-card__img(src="/tmp/portfolio_portrait.jpg")
-        .session-card__overlay
-          %ul.session-card__overlay-content
-            %li.session-card__time
+            %li.event-card__title
+              %h3.event-card__title--inner Awesome Family
+            %li.event-card__kind
+              %small Family Event
+    %li.event-card(data-kind="Portrait")
+      %a.event-card__link(href="#")
+        %img.event-card__img(src="/tmp/portfolio_portrait.jpg")
+        .event-card__overlay
+          %ul.event-card__overlay-content
+            %li.event-card__time
               %time(datetime="2017-12-31") 12.31.2017
-            %li.session-card__title
-              %h3.session-card__title--inner Awesome Family
-            %li.session-card__kind
-              %small Family Session
+            %li.event-card__title
+              %h3.event-card__title--inner Awesome Family
+            %li.event-card__kind
+              %small Family Event

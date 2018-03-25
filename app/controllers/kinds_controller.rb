@@ -1,5 +1,6 @@
 class KindsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+  before_action :require_admin, except: [:index]
 
   def index
     @kinds = Kind.all
@@ -38,7 +39,7 @@ class KindsController < ApplicationController
   def destroy
     kind = Kind.find params[:id]
     kind.destroy
-    flash[:success] = "The session \"#{kind.name}\" was removed."
+    flash[:success] = "The event \"#{kind.name}\" was removed."
     redirect_to kinds_path
   end
 

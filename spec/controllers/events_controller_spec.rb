@@ -1,16 +1,16 @@
 require 'rails_helper'
 
-describe SessionsController do
+describe EventsController do
 
   describe 'GET index' do
     before do
       Fabricate.times(3, :kind)
-      Fabricate.times(3, :session, creator: Fabricate(:user), kind: Kind.first)
+      Fabricate.times(3, :event, creator: Fabricate(:user), kind: Kind.first)
       get :index
     end
 
-    it 'sets @sessions to a all sessions' do
-      expect(assigns(:sessions).count).to eq(3)
+    it 'sets @events to a all events' do
+      expect(assigns(:events).count).to eq(3)
     end
 
     it 'sets @kinds to an array of kind objects' do
@@ -18,23 +18,23 @@ describe SessionsController do
       expect(assigns(:kinds).first).to be_instance_of Kind
     end
 
-    it 'sets @kinds to an array of kind objects that have at least 1 session' do
+    it 'sets @kinds to an array of kind objects that have at least 1 event' do
       expect(assigns(:kinds).count).to eq(1)
     end
   end
 
   describe 'GET show' do
-    it 'sets @session to selected session' do
-      sess = Fabricate(:session, creator: Fabricate(:user), kind: Fabricate(:kind))
+    it 'sets @event to selected event' do
+      sess = Fabricate(:event, creator: Fabricate(:user), kind: Fabricate(:kind))
       get :show, params: { id: sess.id }
-      expect(assigns(:session)).to eq(sess)
+      expect(assigns(:event)).to eq(sess)
     end
   end
 
   describe 'GET new' do
-    it 'sets @session to a new session' do
+    it 'sets @event to a new event' do
       get :new
-      expect(assigns(:session)).to be_a_new Session
+      expect(assigns(:event)).to be_a_new Event
     end
   end
 
@@ -44,20 +44,20 @@ describe SessionsController do
       let(:kind) { Fabricate(:kind) }
 
       before do
-        session[:user_id] = current_user.id
-        post :create, params: { session: Fabricate.attributes_for(:session).merge({"kind_id" => kind.id}) }
+        event[:user_id] = current_user.id
+        post :create, params: {event: Fabricate.attributes_for(:event).merge({"kind_id" => kind.id}) }
       end
 
-      it 'creates a session' do
-        expect(Session.count).to eq(1)
+      it 'creates a event' do
+        expect(Event.count).to eq(1)
       end
 
       it 'set flash success message' do
         expect(flash[:success]).to be_present
       end
 
-      it 'redirects to the session page' do
-        expect(response).to redirect_to session_path(Session.first)
+      it 'redirects to the event page' do
+        expect(response).to redirect_to event_path(Event.first)
       end
     end
 
@@ -65,13 +65,13 @@ describe SessionsController do
       let(:current_user) { Fabricate(:user) }
 
       before do
-        session[:user_id] = current_user.id
-        altered_params = Fabricate.attributes_for(:session).merge({'title' => ''})
-        post :create, params: { session: altered_params }
+        event[:user_id] = current_user.id
+        altered_params = Fabricate.attributes_for(:event).merge({'title' => ''})
+        post :create, params: {event: altered_params }
       end
 
-      it 'does not create a new session' do
-        expect(Session.count).to eq(0)
+      it 'does not create a new event' do
+        expect(Event.count).to eq(0)
       end
 
       it 'sets flash danger message' do
@@ -85,16 +85,16 @@ describe SessionsController do
   end
 
   describe 'GET edit' do
-    it 'sets @session to selected session' do
+    it 'sets @event to selected event' do
       alice = Fabricate(:user)
       kind = Fabricate(:kind)
-      sess = Fabricate(:session, creator: alice, kind: kind)
+      sess = Fabricate(:event, creator: alice, kind: kind)
 
       get :edit, params: { id: sess.id }
-      expect(assigns(:session)).to eq(sess)
+      expect(assigns(:event)).to eq(sess)
     end
 
-    it_behaves_like 'session not found' do
+    it_behaves_like 'event not found' do
       let(:action) { get :edit, params: { id: 1 } }
     end
   end
@@ -103,42 +103,42 @@ describe SessionsController do
     context 'with valid inputs' do
       let(:alice) { Fabricate(:user) }
       let(:kind) { Fabricate(:kind) }
-      let(:sess) { Fabricate(:session, title: 'old title', creator: alice, kind: kind) }
+      let(:sess) { Fabricate(:event, title: 'old title', creator: alice, kind: kind) }
 
       before do
         attrs = sess.attributes.merge("title" => 'new title')
         attrs["images"] = attrs["images"].map { |i| fixture_file_upload(i) }
         attrs["cover"] = fixture_file_upload(attrs["cover"])
-        patch :update, params: { session: attrs, id: sess.id }
+        patch :update, params: { event: attrs, id: sess.id }
       end
 
-      it 'updates session' do
-        expect(Session.first.title).to eq('new title')
+      it 'updates event' do
+        expect(Event.first.title).to eq('new title')
       end
 
       it 'sets the flash success message' do
         expect(flash[:success]).to be_present
       end
 
-      it 'redirect to the session page' do
-        expect(response).to redirect_to session_path(sess)
+      it 'redirect to the event page' do
+        expect(response).to redirect_to event_path(sess)
       end
     end
 
     context 'with invalid inputs' do
       let(:alice) { Fabricate(:user) }
       let(:kind) { Fabricate(:kind) }
-      let(:sess) { Fabricate(:session, title: 'old title', creator: alice, kind: kind) }
+      let(:sess) { Fabricate(:event, title: 'old title', creator: alice, kind: kind) }
 
       before do
         attrs = sess.attributes.merge("title" => '')
         attrs["images"] = attrs["images"].map { |i| fixture_file_upload(i) }
         attrs["cover"] = fixture_file_upload(attrs["cover"])
-        patch :update, params: { session: attrs, id: sess.id }
+        patch :update, params: { event: attrs, id: sess.id }
       end
 
-      it 'does not update session' do
-        expect(Session.first.title).to eq('old title')
+      it 'does not update event' do
+        expect(Event.first.title).to eq('old title')
       end
 
       it 'sets flash danger message' do
@@ -150,27 +150,27 @@ describe SessionsController do
       end
     end
 
-    it_behaves_like 'session not found' do
+    it_behaves_like 'event not found' do
       let(:action) { patch :update, params: { id: 1 } }
     end
   end
 
   describe 'DELETE destroy' do
-    context 'with an existing session' do
+    context 'with an existing event' do
       let(:alice) { Fabricate(:user) }
       let(:kind) { Fabricate(:kind) }
-      let(:sess) { Fabricate(:session, title: 'old title', creator: alice, kind: kind) }
+      let(:sess) { Fabricate(:event, title: 'old title', creator: alice, kind: kind) }
 
       before do
         delete :destroy, params: { id: sess.id }
       end
 
-      it 'deletes the session' do
-        expect(Session.count).to eq(0)
+      it 'deletes the event' do
+        expect(Event.count).to eq(0)
       end
 
-      it 'redirects to the sessions index page' do
-        expect(response).to redirect_to sessions_path
+      it 'redirects to the events index page' do
+        expect(response).to redirect_to events_path
       end
 
       it 'sets the flash success message' do
@@ -178,7 +178,7 @@ describe SessionsController do
       end
     end
 
-    it_behaves_like 'session not found' do
+    it_behaves_like 'event not found' do
       let(:action) { delete :destroy, params: { id: 1 } }
     end
   end

@@ -6,7 +6,7 @@
   - else
     - @kinds.each do |kind|
       .kind__container
-        = link_to sessions_path(kind: kind.name), class: 'kind__link' do
+        = link_to events_path(kind: kind.name), class: 'kind__link' do
           %article.kind
             .kind__img-container
               %img.kind__img(src="#{kind.cover}")
@@ -14,4 +14,4 @@
               %h2.kind__name= kind.name
               %p.kind__desc= kind.description
 
-        = link_to "Delete", kind_path(kind), method: :delete, class: 'btn-delete btn-delete--bottom-right', data: { confirm: "Are you sure you want to delete the kind \"#{kind.name}\"? NOTE: All sessions associated with this kind will also be removed." }
+        = link_to "Delete", kind_path(kind), method: :delete, class: 'btn-delete btn-delete--bottom-right', data: { confirm: "Are you sure you want to delete the kind \"#{kind.name}\"? NOTE: All events associated with this kind will also be removed." }
