@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   helper_method :logged_in?, :current_user
 
   def require_admin
-    redirect_to home_path unless current_user
+    render file: "#{Rails.root}/public/404", status: 404 unless current_user
   end
 
   def current_user

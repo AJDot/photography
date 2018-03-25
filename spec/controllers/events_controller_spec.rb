@@ -25,13 +25,19 @@ describe EventsController do
 
   describe 'GET show' do
     it 'sets @event to selected event' do
-      sess = Fabricate(:event, creator: Fabricate(:user), kind: Fabricate(:kind))
-      get :show, params: { id: sess.id }
-      expect(assigns(:event)).to eq(sess)
+      event = Fabricate(:event, creator: Fabricate(:user), kind: Fabricate(:kind))
+      get :show, params: { id: event.id }
+      expect(assigns(:event)).to eq(event)
     end
   end
 
   describe 'GET new' do
+    it_behaves_like 'requires admin' do
+      let(:action) { get :new }
+    end
+
+    before { set_current_user }
+
     it 'sets @event to a new event' do
       get :new
       expect(assigns(:event)).to be_a_new Event
@@ -39,12 +45,17 @@ describe EventsController do
   end
 
   describe 'POST create' do
+    it_behaves_like 'requires admin' do
+      let(:action) { post :create }
+    end
+
+    before { set_current_user }
+
     context 'with valid inputs' do
       let(:current_user) { Fabricate(:user) }
       let(:kind) { Fabricate(:kind) }
 
       before do
-        event[:user_id] = current_user.id
         post :create, params: {event: Fabricate.attributes_for(:event).merge({"kind_id" => kind.id}) }
       end
 
@@ -62,10 +73,7 @@ describe EventsController do
     end
 
     context 'with invalid inputs' do
-      let(:current_user) { Fabricate(:user) }
-
       before do
-        event[:user_id] = current_user.id
         altered_params = Fabricate.attributes_for(:event).merge({'title' => ''})
         post :create, params: {event: altered_params }
       end
@@ -85,13 +93,19 @@ describe EventsController do
   end
 
   describe 'GET edit' do
-    it 'sets @event to selected event' do
-      alice = Fabricate(:user)
-      kind = Fabricate(:kind)
-      sess = Fabricate(:event, creator: alice, kind: kind)
+    let(:alice) { Fabricate(:user) }
+    let(:kind) { Fabricate(:kind) }
+    let(:event) { Fabricate(:event, creator: alice, kind: kind) }
 
-      get :edit, params: { id: sess.id }
-      expect(assigns(:event)).to eq(sess)
+    it_behaves_like 'requires admin' do
+      let(:action) { get :edit, params: { id: event.id } }
+    end
+
+    before { set_current_user(alice) }
+
+    it 'sets @event to selected event' do
+      get :edit, params: { id: event.id }
+      expect(assigns(:event)).to eq(event)
     end
 
     it_behaves_like 'event not found' do
@@ -100,16 +114,26 @@ describe EventsController do
   end
 
   describe 'PATCH update' do
+    let(:alice) { Fabricate(:user) }
+
+    it_behaves_like 'requires admin' do
+      alice = Fabricate(:user)
+      kind = Fabricate(:kind)
+      event = Fabricate(:event, title: 'old title', creator: alice, kind: kind)
+      let(:action) { patch :update, params: { id: event.id } }
+    end
+
+    before { set_current_user(alice) }
+
     context 'with valid inputs' do
-      let(:alice) { Fabricate(:user) }
       let(:kind) { Fabricate(:kind) }
-      let(:sess) { Fabricate(:event, title: 'old title', creator: alice, kind: kind) }
+      let(:event) { Fabricate(:event, title: 'old title', creator: alice, kind: kind) }
 
       before do
-        attrs = sess.attributes.merge("title" => 'new title')
+        attrs = event.attributes.merge("title" => 'new title')
         attrs["images"] = attrs["images"].map { |i| fixture_file_upload(i) }
         attrs["cover"] = fixture_file_upload(attrs["cover"])
-        patch :update, params: { event: attrs, id: sess.id }
+        patch :update, params: { event: attrs, id: event.id }
       end
 
       it 'updates event' do
@@ -121,20 +145,19 @@ describe EventsController do
       end
 
       it 'redirect to the event page' do
-        expect(response).to redirect_to event_path(sess)
+        expect(response).to redirect_to event_path(event)
       end
     end
 
     context 'with invalid inputs' do
-      let(:alice) { Fabricate(:user) }
       let(:kind) { Fabricate(:kind) }
-      let(:sess) { Fabricate(:event, title: 'old title', creator: alice, kind: kind) }
+      let(:event) { Fabricate(:event, title: 'old title', creator: alice, kind: kind) }
 
       before do
-        attrs = sess.attributes.merge("title" => '')
+        attrs = event.attributes.merge("title" => '')
         attrs["images"] = attrs["images"].map { |i| fixture_file_upload(i) }
         attrs["cover"] = fixture_file_upload(attrs["cover"])
-        patch :update, params: { event: attrs, id: sess.id }
+        patch :update, params: { event: attrs, id: event.id }
       end
 
       it 'does not update event' do
@@ -156,13 +179,21 @@ describe EventsController do
   end
 
   describe 'DELETE destroy' do
+    let(:alice) { Fabricate(:user) }
+
+    it_behaves_like 'requires admin' do
+      event = Fabricate(:event, title: 'old title', creator: Fabricate(:user), kind: Fabricate(:kind))
+      let(:action) { delete :destroy, params: { id: event.id } }
+    end
+
+    before { set_current_user }
+
     context 'with an existing event' do
-      let(:alice) { Fabricate(:user) }
       let(:kind) { Fabricate(:kind) }
-      let(:sess) { Fabricate(:event, title: 'old title', creator: alice, kind: kind) }
+      let(:event) { Fabricate(:event, title: 'old title', creator: alice, kind: kind) }
 
       before do
-        delete :destroy, params: { id: sess.id }
+        delete :destroy, params: { id: event.id }
       end
 
       it 'deletes the event' do

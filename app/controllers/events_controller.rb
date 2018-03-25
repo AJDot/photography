@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+  before_action :require_admin, except: [:index, :show]
 
   def index
     @events = Event.all
@@ -53,7 +54,7 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:title, :date, :kind_id, :gist, :description, :cover, {event_images: []})
+    params.require(:event).permit(:title, :date, :kind_id, :gist, :description, :cover, {images: []})
   end
 
   def record_not_found
