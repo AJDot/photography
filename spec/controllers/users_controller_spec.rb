@@ -2,17 +2,31 @@ require 'rails_helper'
 
 describe UsersController do
   describe 'GET edit' do
-    it 'sets @user to current logged in user'
+    it_behaves_like 'requires admin' do
+      let(:action) { get :edit, params: {id: 1 } }
+    end
+
+    let(:alice) { Fabricate(:user, name: 'old name') }
+
+    it 'sets @user to current logged in user' do
+      set_current_user(alice)
+      get :edit, params: { id: alice.id }
+      expect(assigns(:user)).to eq(alice)
+    end
   end
 
   describe 'PATCH update' do
+    it_behaves_like 'requires admin' do
+      let(:action) { patch :update, params: {id: 1 } }
+    end
+
     context 'with valid inputs' do
-      let(:current_user) { Fabricate(:user, name: 'old name') }
+      let(:alice) { Fabricate(:user, name: 'old name') }
 
       before do
-        event[:user_id] = current_user.id
-        altered_params = current_user.attributes.merge({'name' => 'new name'})
-        patch :update, params: { user: altered_params, id: current_user.id }
+        set_current_user(alice)
+        altered_params = alice.attributes.merge({'name' => 'new name'})
+        patch :update, params: { user: altered_params, id: alice.id }
       end
 
       it 'updates user' do
@@ -29,12 +43,12 @@ describe UsersController do
     end
 
     context 'with invalid inputs' do
-      let(:current_user) { Fabricate(:user, name: 'old name') }
+      let(:alice) { Fabricate(:user, name: 'old name') }
 
       before do
-        event[:user_id] = current_user.id
-        altered_params = current_user.attributes.merge({'name' => ''})
-        patch :update, params: { user: altered_params, id: current_user.id }
+        set_current_user(alice)
+        altered_params = alice.attributes.merge({'name' => ''})
+        patch :update, params: { user: altered_params, id: alice.id }
       end
 
       it 'does not update user' do

@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   get 'login', to: 'sessions#new', as: 'login'
   resources :kinds, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :events do
-    resources :event_images, only: [:create, :destroy], controller: 'event_images'
+    resources :images, only: [:create, :destroy], controller: 'event_images'
   end
   resources :prints, only: [:index]
   get 'about', to: 'pages#about', as: 'about'

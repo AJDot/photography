@@ -10,6 +10,7 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find params[:id]
+    redirect_to events_path if !logged_in? && @event.images.count == 0
   end
 
   def new
@@ -17,7 +18,7 @@ class EventsController < ApplicationController
   end
 
   def create
-    @user = User.first
+    @user = User.find_by owner: true
     @event = Event.new(event_params)
     @event.creator = @user
     if @event.save

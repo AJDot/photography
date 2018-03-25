@@ -1,10 +1,11 @@
 class EventImagesController < ApplicationController
+  before_action :require_admin
   before_action :set_event
 
   def create
-    add_more_images(images_params[:event_images])
+    add_more_images(images_params[:images])
     if @event.save
-      flash[:success] = "Upload successful. #{images_params[:event_images].count} added."
+      flash[:success] = "Upload successful. #{images_params[:images].count} added."
     else
       flash[:danger] = "Failed uploading images"
     end
@@ -38,8 +39,8 @@ class EventImagesController < ApplicationController
 
     deleted_image.try(:remove!) # delete image from S3
     @event.images = remain_images
-    if @event.images.empty? && @event.read_attribute(:event_images).size > 0
-      @event.write_attribute(:event_images, [])
+    if @event.images.empty? && @event.read_attribute(:images).size > 0
+      @event.write_attribute(:images, [])
     end
 
     true
@@ -47,6 +48,6 @@ class EventImagesController < ApplicationController
 
   def images_params
     params["event"] = {"images" => []} unless params[:event]
-      params.require(:event).permit({event_images: [] })
+      params.require(:event).permit({images: [] })
   end
 end

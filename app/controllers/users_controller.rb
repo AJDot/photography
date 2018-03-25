@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
+  before_action :require_admin
+
   def edit
-    @user = User.first
+    @user = User.find_by owner: true
   end
 
   def update

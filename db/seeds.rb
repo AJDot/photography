@@ -1,6 +1,6 @@
 include ActionDispatch::TestProcess::FixtureFile
 
-alice = Fabricate(:user)
+alice = Fabricate(:user, owner: true)
 tmp_images = Dir.glob(Rails.root.join('public/tmp/*.jpg'))
 engagement = Fabricate(
   :kind,

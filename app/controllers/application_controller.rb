@@ -4,7 +4,10 @@ class ApplicationController < ActionController::Base
   helper_method :logged_in?, :current_user
 
   def require_admin
-    render file: "#{Rails.root}/public/404", status: 404 unless current_user
+    unless current_user
+      flash[:danger] = 'That page does not exist!'
+      redirect_to home_path
+    end
   end
 
   def current_user

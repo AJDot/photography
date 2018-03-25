@@ -2,8 +2,17 @@ require 'rails_helper'
 
 describe PagesController do
   describe 'GET about' do
-    before { get :about }
-    it 'sets @user to current user'
+    let(:alice) { Fabricate(:user, owner: true) }
+
+    before do
+      alice
+      get :about
+    end
+
+    it 'sets @user to site owner' do
+      expect(assigns(:user)).to eq(alice)
+    end
+
     it 'sets @contact_me for contact me form' do
       expect(assigns(:contact_me)).to be_instance_of ContactMe
     end
