@@ -4,8 +4,8 @@
     %li.nav__list-item
       = link_to 'Home', home_path, class: base_classes + active_class(home_path, "nav__link--active")
     %li.nav__list-item
-      = link_to 'Portfolio', sessions_path, class: base_classes + active_class(sessions_path, "nav__link--active")
-    %li.nav__list-item
+      = link_to 'Portfolio', events_path, class: base_classes + active_class(events_path, "nav__link--active")
+    -#%li.nav__list-item
       %a.nav__link.btn-min.btn-min--light(href="#") Pricing
     %li.nav__list-item
       %a.nav__link(href="#")
@@ -16,3 +16,6 @@
       = link_to 'About', about_path, class: base_classes + active_class(about_path, "nav__link--active")
     %li.nav__list-item
       = link_to 'Book Me', book_me_path, class: base_classes + active_class(book_me_path, "nav__link--active")
+    - if logged_in?
+      %li.nav__list-item
+        = link_to 'Logout', logout_path, method: 'DELETE', class: 'btn-delete logout'

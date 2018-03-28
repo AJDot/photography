@@ -6,8 +6,8 @@
       %li.foot__nav-list-item
         = link_to 'Home', home_path, class: base_classes + active_class(home_path, "foot__nav-link--active")
       %li.foot__nav-list-item
-        = link_to 'Portfolio', sessions_path, class: base_classes + active_class(sessions_path, "foot__nav-link--active")
-      %li.foot__nav-list-item
+        = link_to 'Portfolio', events_path, class: base_classes + active_class(events_path, "foot__nav-link--active")
+      -#%li.foot__nav-list-item
         = link_to 'Pricing', "#", class: base_classes + active_class("#", "foot__nav-link--active")
       %li.foot__nav-list-item
         = link_to 'Prints', prints_path, class: base_classes + active_class(prints_path, "foot__nav-link--active")

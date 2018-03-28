@@ -1,0 +1,43 @@
+= content_for :head do
+  :javascript
+    var filter = "#{@filter}";
+  = javascript_include_tag "events_filter", "data-turbolinks-track" => "reload"
+
+- if logged_in?
+  = link_to "Create New Event", new_event_path, class: 'btn'
+
+%section.events.clearfix
+  %h2.events__title
+    %span Events
+    - if @kinds.count > 1
+      .events-filter
+        %button.events-filter__button Filter
+        %ul.events-filter__list
+          - @kinds.each_with_index do |kind, ind|
+            %li(class="events-filter__item events-filter__item--#{ind}")
+              %a.events-filter__link(href="#" data-kind="#{kind.name}")
+                %span.events-filter__link--icon= kind.name
+
+      - x = Math.cos(2 * Math::PI / @kinds.count) * 0.5 + 0.5
+      - y = -(Math.sin(2 * Math::PI / @kinds.count) * 0.5 - 0.5)
+      %svg(height="0" width="0")
+        %defs
+          %clipPath(clipPathUnits="objectBoundingBox" id="sector")
+            %path(fill="none" stroke="#111" stroke-width="1" class="sector" d="M0.5,0.5 l0.5,0 A0.5,0.5 0 0,0 #{x},#{y} z")
+
+  - if @events.empty?
+    %p There are no events! Add an event using the link on this page.
+  - else
+    %ul.events__list
+      - @events.each_with_index do |event, ind|
+        %li.event-card(data-kind="#{event.kind.name}")
+          = link_to event_path(event), class: 'event-card__link' do
+            %img.event-card__img(src="#{event.cover}")
+            .event-card__overlay
+              %ul.event-card__overlay-content
+                %li.event-card__time
+                  %time(datetime="#{event.date}")= event.date
+                %li.event-card__title
+                  %h3.event-card__title--inner= event.title
+                %li.event-card__kind
+                  %small= event.kind.name

@@ -1,2 +1,14 @@
-%section.admin_create_session.clearfix
-  = render 'form', sess: @session
+%section.login.clearfix
+  %h2.login__title Login
+  = form_tag login_path do
+    %fieldset
+      %dl.form__group.form__group--6of12
+        %dt.form__item
+          = label_tag :email, 'Email Address', class: 'form__label'
+          = email_field_tag :email, nil, class: 'form__field'
+      %dl.form__group.form__group--6of12
+        %dt.form__item
+          = label_tag :password, 'Password', class: 'form__label'
+          = password_field_tag :password, nil, class: 'form__field'
+    .form__group
+      = submit_tag 'Login', class: 'btn btn--wide'

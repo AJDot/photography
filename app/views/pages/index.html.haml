@@ -29,19 +29,19 @@
     %li
       = link_to 'Admin Delete Kind', kinds_path
     %li
-      = link_to 'Admin Create New Session', new_session_path
+      = link_to 'Admin Create New Event', new_event_path
     %li
-      = link_to 'View All Sessions', sessions_path
+      = link_to 'View All Events', events_path
     %li
-      = link_to 'View Session', session_path(Session.first)
+      = link_to 'View Event', event_path(Event.first)
     %li
-      = link_to 'Admin Edit Session', edit_session_path(Session.first)
+      = link_to 'Admin Edit Event', edit_event_path(Event.first)
     %li
-      = link_to 'Admin Delete Session', session_path(Session.first)
+      = link_to 'Admin Delete Event', event_path(Event.first)
     %li
-      = link_to 'Add Images to Session', session_path(Session.first)
+      = link_to 'Add Images to Event', event_path(Event.first)
     %li
-      = link_to 'Delete Image from Session', session_path(Session.first)
+      = link_to 'Delete Image from Event', event_path(Event.first)
     %li
       = link_to 'About page with Contact Me form', about_path
     %li

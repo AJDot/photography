@@ -39,7 +39,6 @@ $(document).on("turbolinks:load", function() {
       this.highlightThumb(this.$thumbnails.filter('[data-id=' + id + ']'));
     },
     positionThumbnails: function(offset = 0) {
-      console.log("dynamic is:", this.dynamic)
       if (!this.dynamic) { return; }
       var self = this;
       var widthPx = +$('#thumbnails').width() / this.thumbsToPreview;

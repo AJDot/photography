@@ -29,7 +29,7 @@ module Etsy
 
     def self.find(options={})
       if options[:shop_id]
-        uri = URI::HTTPS.build(host: host, path: path + "/shops/#{optoins[:shop_id]}", query: "api_key=#{api_key}")
+        uri = URI::HTTPS.build(host: host, path: path + "/shops/#{options[:shop_id]}", query: "api_key=#{api_key}")
       elsif options[:shop_name]
         uri = URI::HTTPS.build(host: host, path: path + "/shops", query: "api_key=#{api_key}&shop_name=#{options[:shop_name]}")
       end

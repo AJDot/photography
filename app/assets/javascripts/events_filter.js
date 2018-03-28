@@ -1,22 +1,22 @@
 $(document).on('turbolinks:load', function() {
-  var SessionFilterer = {
-    $cards: $(".session-card"),
+  var EventFilterer = {
+    $cards: $(".event-card"),
     Filter: {
       bindEvents: function() {
-        $('.sessions-filter__button, .sessions-filter__link').on('click', function(event) {
-          $('.sessions-filter__list').toggleClass('sessions-filter__list--opened');
+        $('.events-filter__button, .events-filter__link').on('click', function(event) {
+          $('.events-filter__list').toggleClass('events-filter__list--opened');
         });
 
-        $('.sessions-filter__list').on('click', 'a', function(event) {
+        $('.events-filter__list').on('click', 'a', function(event) {
           $a = $(this);
-          $li = $a.closest('.sessions-filter__item');
-          $('.sessions-filter__item').removeClass('active');
+          $li = $a.closest('.events-filter__item');
+          $('.events-filter__item').removeClass('active');
           $li.addClass('active');
         });
       },
 
       rotate: function() {
-        var $items = $('.sessions-filter__item');
+        var $items = $('.events-filter__item');
         var count = $items.length;
         $items.each(function(index) {
           $(this).css({
@@ -31,7 +31,7 @@ $(document).on('turbolinks:load', function() {
       }
     },
 
-    filterSessions: function(event) {
+    filterEvents: function(event) {
       event.preventDefault();
       var kind = $(event.currentTarget).data("kind");
       this.renderFilter(kind);
@@ -48,13 +48,13 @@ $(document).on('turbolinks:load', function() {
     },
 
     updateButton: function(kind) {
-      var $button = $('.sessions-filter__button')
+      var $button = $('.events-filter__button')
       $button.text(kind);
     },
 
     bindEvents: function() {
       this.Filter.init();
-      $('.sessions-filter__link').on('click', this.filterSessions.bind(this));
+      $('.events-filter__link').on('click', this.filterEvents.bind(this));
     },
 
     init: function(kind) {
@@ -66,5 +66,5 @@ $(document).on('turbolinks:load', function() {
     }
   }
 
-  SessionFilterer.init(filter);
+  EventFilterer.init(filter);
 });

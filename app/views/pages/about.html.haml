@@ -8,7 +8,7 @@
 
   %hr.about__hr
 
-  %p.about__form__explain Want to find out more? Interested in prints, booking a session? Or maybe you spotted a typo on my website? Send me message.
+  %p.about__form__explain Want to find out more? Interested in prints, booking a event? Or maybe you spotted a typo on my website? Send me message.
 
   = form_for @contact_me, class: 'about__form' do |f|
     %fieldset
@@ -26,6 +26,6 @@
         %dt.form__item
           = f.label :message, 'Your Message', class: 'form__label'
         %dd.form__item
-          = f.text_area :message, class: 'form__field form__field--vert-resizeable', placeholder: "What do you have to say?", required: true
+          = f.text_area :message, class: 'form__field form__field--vert-resizeable', placeholder: "What do you want to say?", required: true
     .form__group
       = f.submit 'Send', class: 'btn btn--wide'

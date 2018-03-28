@@ -13,7 +13,7 @@ class PagesController < ApplicationController
   end
 
   def about
-    @user = User.first
+    @user = User.find_by owner: true
     @contact_me = ContactMe.new
   end
 end

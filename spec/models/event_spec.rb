@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Session do
+describe Event do
   it { is_expected.to belong_to(:creator) }
   it { is_expected.to validate_presence_of(:creator) }
   it { is_expected.to validate_presence_of(:kind) }
