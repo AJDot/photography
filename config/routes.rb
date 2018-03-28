@@ -12,7 +12,9 @@ Rails.application.routes.draw do
   get 'home', to: 'pages#home', as: 'home'
   get 'sitemap', to: 'pages#index', as: 'sitemap'
   resources :users, only: [:edit, :update]
-  get 'login', to: 'sessions#new', as: 'login'
+  get 'ineedtochangestuff', to: 'sessions#new', as: 'login'
+  post 'ineedtochangestuff', to: 'sessions#create'
+  delete 'logout', to: 'sessions#destroy', as: 'logout'
   resources :kinds, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :events do
     resources :images, only: [:create, :destroy], controller: 'event_images'

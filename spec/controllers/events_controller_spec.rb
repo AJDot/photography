@@ -52,10 +52,11 @@ describe EventsController do
     before { set_current_user }
 
     context 'with valid inputs' do
-      let(:current_user) { Fabricate(:user) }
+      let(:alice) { Fabricate(:user, owner: true) }
       let(:kind) { Fabricate(:kind) }
 
       before do
+        set_current_user(alice)
         post :create, params: {event: Fabricate.attributes_for(:event).merge({"kind_id" => kind.id}) }
       end
 

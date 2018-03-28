@@ -1,6 +1,6 @@
 include ActionDispatch::TestProcess::FixtureFile
 
-alice = Fabricate(:user, owner: true)
+tracy = Fabricate(:user, name: "Tracy Awesome", email: "tracy@example.com", password: 'password', owner: true)
 tmp_images = Dir.glob(Rails.root.join('public/tmp/*.jpg'))
 engagement = Fabricate(
   :kind,
@@ -34,5 +34,5 @@ family = Fabricate(
 # )
 
 20.times do
-  Fabricate(:event, cover: Pathname.new(tmp_images.sample).open, creator: alice, kind: Kind.all.sample)
+  Fabricate(:event, cover: Pathname.new(tmp_images.sample).open, creator: tracy, kind: Kind.all.sample)
 end

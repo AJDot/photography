@@ -6,7 +6,7 @@ describe UsersController do
       let(:action) { get :edit, params: {id: 1 } }
     end
 
-    let(:alice) { Fabricate(:user, name: 'old name') }
+    let(:alice) { Fabricate(:user, name: 'old name', owner: true) }
 
     it 'sets @user to current logged in user' do
       set_current_user(alice)

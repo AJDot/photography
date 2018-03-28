@@ -9,9 +9,9 @@
       %fieldset
         %dl.form__group.form__group--6of12
           %dt.form__item
-            = f.label :event_images, 'Images', class: 'form__label'
+            = f.label :images, 'Images', class: 'form__label'
           %dd.form__item
-            = f.file_field :event_images, class: 'form__field', multiple: true
+            = f.file_field :images, class: 'form__field', multiple: true
       .form__group.form__group--6of12
         = f.submit 'Add Images', class: 'btn btn--wide'
 
