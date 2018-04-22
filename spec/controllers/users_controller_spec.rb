@@ -21,7 +21,7 @@ describe UsersController do
     end
 
     context 'with valid inputs' do
-      let(:alice) { Fabricate(:user, name: 'old name') }
+      let(:alice) { Fabricate(:user, name: 'old name', owner: true) }
 
       before do
         set_current_user(alice)
@@ -43,7 +43,7 @@ describe UsersController do
     end
 
     context 'with invalid inputs' do
-      let(:alice) { Fabricate(:user, name: 'old name') }
+      let(:alice) { Fabricate(:user, name: 'old name', owner: true) }
 
       before do
         set_current_user(alice)

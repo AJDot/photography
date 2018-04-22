@@ -5,6 +5,7 @@ class EventsController < ApplicationController
   def index
     @events = Event.all
     @kinds = Kind.select { |k| k.events.count > 0 }
+    # @kinds = Kind.joins(:events).group('kinds.id').to_a
     @filter = params[:kind] || ""
   end
 

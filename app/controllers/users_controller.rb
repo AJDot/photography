@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find params[:id]
+    @user = User.find_by owner: true
     if @user.update(user_params)
       flash[:success] = 'You have updated your profile.'
       redirect_to root_path
