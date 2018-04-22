@@ -5,35 +5,38 @@
 
   = form_for @book_me do |f|
     %fieldset
-      %dl.form__group.form__group--4of12
-        %dt.form__item
-          = f.label :name, 'Your Name', class: 'form__label'
-        %dd.form__item
-          = f.text_field :name, class: 'form__field', placeholder: 'Amazing Person', required: true
-      %dl.form__group.form__group--4of12
-        %dt.form__item
-          = f.label :phone, 'Phone', class: 'form__label'
-        %dd.form__item
-          = f.telephone_field :phone, class: 'form__field', placeholder: '(###) ### - ####'
-      %dl.form__group.form__group--4of12
-        %dt.form__item
-          = f.label :email, 'Email', class: 'form__label'
-        %dd.form__item
-          = f.email_field :email, class: 'form__field', placeholder: 'amazing_person@example.com', required: true
-      %dl.form__group.form__group--6of12
-        %dt.form__item
-          = f.label :event_date, 'Event Date', class: 'form__label'
-        %dd.form__item
-          = f.date_field :event_date, class: 'form__field', required: true
-      %dl.form__group.form__group--6of12
-        %dt.form__item
-          = f.label :event_type, 'Event Type', class: 'form__label'
-        %dd.form__item
-          = f.select :event_type, options_for_select(Kind.all.collect { |k| [k.name, k.name] }), {include_blank: "Select a Type"}, class: 'form__field', required: true
-      %dl.form__group
-        %dt.form__item
-          = f.label :message, 'Your Message', class: 'form__label'
-        %dd.form__item
-          = f.text_area :message, class: 'form__field form__field--vert-resizeable', placeholder: "What would you like to know?", required: true
+      .row
+        %dl.form__group.form__group--4of12
+          %dt.form__item
+            = f.label :name, 'Your Name', class: 'form__label'
+          %dd.form__item
+            = f.text_field :name, class: 'form__field', placeholder: 'Amazing Person'
+        %dl.form__group.form__group--4of12
+          %dt.form__item
+            = f.label :phone, 'Phone', class: 'form__label'
+          %dd.form__item
+            = f.telephone_field :phone, class: 'form__field', placeholder: '(###) ### - ####'
+        %dl.form__group.form__group--4of12
+          %dt.form__item
+            = f.label :email, 'Email', class: 'form__label'
+          %dd.form__item
+            = f.email_field :email, class: 'form__field', placeholder: 'amazing_person@example.com'
+      .row
+        %dl.form__group.form__group--6of12
+          %dt.form__item
+            = f.label :event_date, 'Event Date', class: 'form__label'
+          %dd.form__item
+            = f.date_field :event_date, class: 'form__field'
+        %dl.form__group.form__group--6of12
+          %dt.form__item
+            = f.label :event_type, 'Event Type', class: 'form__label'
+          %dd.form__item
+            = f.select :event_type, options_for_select(Kind.all.collect { |k| [k.name, k.name] }, selected: f.object.event_type), {include_blank: "Select a Type"}, class: 'form__field'
+      .row
+        %dl.form__group
+          %dt.form__item
+            = f.label :message, 'Your Message', class: 'form__label'
+          %dd.form__item
+            = f.text_area :message, class: 'form__field form__field--vert-resizeable', placeholder: "What would you like to know?"
     .form__group
       = f.submit 'Send', class: 'btn btn--wide'

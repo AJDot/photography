@@ -42,7 +42,7 @@ describe ContactMeController do
       end
 
       it 'redirects to the about path' do
-        expect(response).to redirect_to about_path
+        expect(response).to render_template 'pages/about'
       end
     end
   end
