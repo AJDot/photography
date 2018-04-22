@@ -2,42 +2,7 @@
   %h2.about__title About Me
 
   - if logged_in?
-    = form_for @user do |f|
-      .form__group
-        = f.submit 'Update Profile', class: 'btn btn--wide'
-      %fieldset
-        %dl.form__group.form__group--6of12
-          %dt.form__item
-            = f.label :name, 'Name', class: 'form__label'
-          %dd.form__item
-            = f.text_field :name, class: 'form__field', placeholder: 'Amazing Person', required: true
-        %dl.form__group.form__group--6of12
-          %dt.form__item
-            = f.label :email, 'Email', class: 'form__label'
-          %dd.form__item
-            = f.email_field :email, class: 'form__field', placeholder: 'amazing_person@example.com', required: true
-        %dl.form__group.form__group--6of12
-          %dt.form__item
-            = f.label :password, 'Password', class: 'form__label'
-          %dd.form__item
-            = f.password_field :password, class: 'form__field', placeholder: 'potatohorsevehicleextension'
-        %dl.form__group.form__group--6of12
-          %dt.form__item
-            = f.label :summary, class: 'form__label'
-          %dd.form__item
-            = f.text_area :summary, class: 'form__field form__field--vert-resizeable', required: true
-        %dl.form__group.form__group--6of12
-          %dt.form__item
-            %h4 Current Portrait
-          %dd.form__item
-            %img.about__img(src="#{@user.portrait}")
-        %dl.form__group.form__group--6of12
-          %dt.form__item
-            = f.label :portrait, class: 'form__label'
-          %dd.form__item
-            = f.file_field :portrait, class: 'form__field'
-      .form__group
-        = f.submit 'Update Profile', class: 'btn btn--wide'
+    = render 'users/edit', user: @user
   - else
     .row.about__content.clearfix
       .col.col--6of12
@@ -49,22 +14,4 @@
 
     %p.about__form__explain Want to find out more? Interested in prints, booking a event? Or maybe you spotted a typo on my website? Send me message.
 
-    = form_for @contact_me, class: 'about__form' do |f|
-      %fieldset
-        %dl.form__group.form__group--6of12
-          %dt.form__item
-            = f.label :name, 'Name', class: 'form__label'
-          %dd.form__item
-            = f.text_field :name, class: 'form__field', placeholder: 'Amazing Person', required: true
-        %dl.form__group.form__group--6of12
-          %dt.form__item
-            = f.label :email, 'Email', class: 'form__label'
-          %dd.form__item
-            = f.email_field :email, class: 'form__field', placeholder: 'amazing_person@example.com', required: true
-        %dl.form__group
-          %dt.form__item
-            = f.label :message, 'Your Message', class: 'form__label'
-          %dd.form__item
-            = f.text_area :message, class: 'form__field form__field--vert-resizeable', placeholder: "What do you want to say?", required: true
-      .form__group
-        = f.submit 'Send', class: 'btn btn--wide'
+    = render 'contact_me/form', contact_me: @contact_me

@@ -49,7 +49,7 @@ describe BookMeController do
       end
 
       it 'redirects to the book_me path' do
-        expect(response).to redirect_to book_me_path
+        expect(response).to render_template 'book_me/new'
       end
     end
   end

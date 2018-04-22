@@ -17,4 +17,9 @@ class BookMe
   def persisted?
     false
   end
+
+  def event_date=(date)
+    return if date.blank?
+    @event_date = Time.new(date)
+  end
 end

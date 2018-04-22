@@ -5,10 +5,10 @@
       %dl.form__group.form__group--6of12
         %dt.form__item
           = label_tag :email, 'Email Address', class: 'form__label'
-          = email_field_tag :email, nil, class: 'form__field', placeholder: 'amazing_person@example.com', required: true
+          = email_field_tag :email, nil, class: 'form__field', placeholder: 'amazing_person@example.com'
       %dl.form__group.form__group--6of12
         %dt.form__item
           = label_tag :password, 'Password', class: 'form__label'
-          = password_field_tag :password, nil, class: 'form__field', placeholder: 'potatohorsevehicleextension', required: true
+          = password_field_tag :password, nil, class: 'form__field', placeholder: 'potatohorsevehicleextension'
     .form__group
       = submit_tag 'Login', class: 'btn btn--wide'
