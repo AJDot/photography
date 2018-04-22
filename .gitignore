@@ -30,4 +30,6 @@
 # Ignore uploaded files from tests
 /spec/support/uploads
 
+.idea/*
+
 \.idea/
