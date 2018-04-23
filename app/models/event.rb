@@ -9,4 +9,11 @@ class Event < ActiveRecord::Base
   def images_cant_be_blank
     errors.add(:event_images, 'one or more files were blank') if images.any?(&:blank?)
   end
+
+  def as_json(options = {})
+    options[:except] = [:kind, :kind_id]
+    attrs = super(options)
+    attrs["kind"] = kind.as_json
+    attrs
+  end
 end

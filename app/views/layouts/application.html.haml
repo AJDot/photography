@@ -9,6 +9,8 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag "https://use.fontawesome.com/releases/v5.0.8/js/all.js"
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'event_filterer', 'data-turbolinks-track': 'reload'
     = yield :head
 
   %body
