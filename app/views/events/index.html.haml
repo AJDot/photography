@@ -3,10 +3,11 @@
     var filter = "#{@filter}";
   = javascript_include_tag "events_filter", "data-turbolinks-track" => "reload"
 
-#app(data-events="#{@events.to_json}" data-event-path="#{event_path('$ID')}")
 
 - if logged_in?
   = link_to "Create New Event", new_event_path, class: 'btn'
+
+#app(data-events="#{@events.to_json}" data-event-path="#{event_path('$ID')}")
 
 %section.events.clearfix
   %h2.events__title

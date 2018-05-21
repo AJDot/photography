@@ -3,7 +3,7 @@ development:
   encoding: unicode
   database: photography_development
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: ajdot
+  username: alex
   password: Il2ep!!!
 
 test:
@@ -11,5 +11,5 @@ test:
   encoding: unicode
   database: photography_test
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: ajdot
+  username: alex
   password: Il2ep!!!
