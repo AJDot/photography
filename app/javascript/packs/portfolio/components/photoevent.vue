@@ -10,7 +10,7 @@
           <li class="event-card__title">
             <h3 class="event-card__title--inner">{{photoevent.title}}</h3>
           </li>
-          <li>
+          <li class="event-card__kind">
             <small>{{photoevent.kind.name}}</small>
           </li>
         </ul>

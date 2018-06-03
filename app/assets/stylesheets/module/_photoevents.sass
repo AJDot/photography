@@ -1,1 +1,28 @@
-@import "photoevents"
+
+.photoevent
+  position: relative
+  backface-visibility: hidden
+  transform-origin: 10% 50%
+  z-index: 1
+
+  &-move
+    transition: all 600ms ease-in-out 50ms
+
+  &-enter-active
+    transition: all 600ms ease-out
+
+  &-leave-active
+    transition: all 600ms ease-in
+    position: absolute
+    z-index: 0
+
+  &-enter
+    opacity: 0
+    max-height: 0
+    transform: scale(0.9)
+
+  &-leave-to
+    opacity: 0
+    max-height: 0
+    transform: scale(0.9)
+

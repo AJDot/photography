@@ -6,7 +6,7 @@
         <h2 class="events__title">
           Events
         </h2>
-        <select v-model="kindFilter" @change="applyFilter" class="form__field">
+        <select v-model="kindFilter" class="form__field">
           <option value="">Select an Event Type</option>
           <option v-for="kind in kinds" :value="kind">{{kind}}</option>
         </select>
@@ -16,11 +16,9 @@
       <p>There are no events! Add an event using the link on this page.</p>
     </template>
     <template v-else>
-      <ul class="events__list">
-        <transition-group name="photoevents" mode="out-in">
-          <photoevent v-for="photoevent in filteredEvents" :photoevent="photoevent" :key="photoevent.id"></photoevent>
-        </transition-group>
-      </ul>
+      <transition-group tag="ul" name="photoevent" class="events__list">
+        <photoevent v-for="photoevent in filteredEvents" :photoevent="photoevent" :key="photoevent.id" class="photoevent"></photoevent>
+      </transition-group>
     </template>
   </section>
 </template>
@@ -40,45 +38,34 @@
           return newPhotoevent;
         });
       }
+
+      let allKinds = photoevents.reduce((result, currentEvent) => {
+        if (!result.includes(currentEvent.kind.name)) {
+          result.push(currentEvent.kind.name);
+        }
+        return result;
+      }, []);
+
       return {
         photoevents: photoevents,
-        filteredEvents: photoevents,
-        filter: ''
+        kindFilter: '',
+        kinds: allKinds
       }
     },
     components: {
       photoevent
     },
     methods: {
-      applyFilter: function() {
-        if (this.filter === "") {
-          this.filteredEvents = this.photoevents;
-          return null
-        }
-
-        this.filteredEvents = this.photoevents.filter((event) => {
-          return event.kind.name === this.filter;
-        });
-      }
     },
     computed: {
-      kinds: function () {
-        let allKinds = this.photoevents.reduce((result, currentEvent) => {
-          if (!result.includes(currentEvent.kind.name)) {
-            result.push(currentEvent.kind.name)
-          }
-          return result;
-        }, []);
-        return allKinds;
-      },
-      kindFilter: {
-        get: function() {
-          return this.filter;
-        },
-
-        set: function(value) {
-          this.filter = value;
+      filteredEvents() {
+        if (this.kindFilter === "") {
+          return this.photoevents;
         }
+
+        return this.photoevents.filter(event => {
+          return event.kind.name === this.kindFilter;
+        });
       }
     }
   }
